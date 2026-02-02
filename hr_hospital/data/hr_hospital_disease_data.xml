@@ -1,0 +1,21 @@
+<odoo noupdate="1">
+    <data>
+        <record id="hr_hospital_disease_depression" model="hr.hospital.disease">
+            <field name="name">Depression</field>
+            <field name="description">A common serious mood disorder.</field>
+            <field name="is_contagious">False</field>
+        </record>
+
+        <record id="hr_hospital_disease_gastritis" model="hr.hospital.disease">
+            <field name="name">Gastritis</field>
+            <field name="description">An inflammation of the lining of the stomach.</field>
+            <field name="is_contagious">False</field>
+        </record>
+
+        <record id="hr_hospital_disease_flu" model="hr.hospital.disease">
+            <field name="name">Flu</field>
+            <field name="description">A respiratory infection.</field>
+            <field name="is_contagious">True</field>
+        </record>
+    </data>
+</odoo>

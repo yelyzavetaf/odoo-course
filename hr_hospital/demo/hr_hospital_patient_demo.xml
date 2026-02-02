@@ -1,0 +1,24 @@
+<odoo>
+    <data>
+        <record id="demo_hr_hospital_patient_ross" model="hr.hospital.patient">
+            <field name="name">Bob Ross</field>
+            <field name="sex">male</field>
+            <field name="complains">Bad mood</field>
+            <field name="doctor_id" ref="demo_hr_hospital_doctor_cooper"/>
+        </record>
+
+        <record id="demo_hr_hospital_patient_lorem" model="hr.hospital.patient">
+            <field name="name">Kate Lorem</field>
+            <field name="sex">female</field>
+            <field name="complains">Stomach pain</field>
+            <field name="doctor_id" ref="demo_hr_hospital_doctor_mayer"/>
+        </record>
+
+        <record id="demo_hr_hospital_patient_thomson" model="hr.hospital.patient">
+            <field name="name">Mary Thomson</field>
+            <field name="sex">female</field>
+            <field name="complains">Running nose</field>
+            <field name="doctor_id" ref="demo_hr_hospital_doctor_swanson"/>
+        </record>
+    </data>
+</odoo>
