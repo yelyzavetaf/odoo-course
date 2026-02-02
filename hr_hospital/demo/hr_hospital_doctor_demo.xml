@@ -1,0 +1,18 @@
+<odoo>
+    <data>
+        <record id="demo_hr_hospital_doctor_cooper" model="hr.hospital.doctor">
+            <field name="name">John Cooper</field>
+            <field name="specialization">Psychologist</field>
+        </record>
+
+        <record id="demo_hr_hospital_doctor_swanson" model="hr.hospital.doctor">
+            <field name="name">Emily Swanson</field>
+            <field name="specialization">Physician</field>
+        </record>
+
+        <record id="demo_hr_hospital_doctor_mayer" model="hr.hospital.doctor">
+            <field name="name">Bred Mayer</field>
+            <field name="specialization">Gastroenterologist</field>
+        </record>
+    </data>
+</odoo>
