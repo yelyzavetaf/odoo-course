@@ -5,9 +5,24 @@ class HrHospitalVisit(models.Model):
     _name = 'hr.hospital.visit'
     _description = 'Visit'
 
-    visit_date = fields.Datetime(
-        string='Visit Scheduled Date',
+    active = fields.Boolean(default=True)
+
+    visit_status = fields.Selection(
+        selection=[
+            ('planned', 'Planned'),
+            ('done', 'Done'),
+            ('cancelled', 'Cancelled'),
+            ('missed', 'Missed by patient')
+        ],
+        required=True)
+
+    planned_date = fields.Datetime(
+        string='Visit Planned Date',
         default=fields.Datetime.now
+    )
+
+    actual_date = fields.Datetime(
+        string='Visit Actual Date',
     )
 
     doctor_id = fields.Many2one(
@@ -22,7 +37,29 @@ class HrHospitalVisit(models.Model):
         required=True,
     )
 
-    diagnose_id = fields.Many2many(
-        comodel_name='hr.hospital.disease',
-        string='Diagnose',
+    visit_type = fields.Selection(
+        selection=[
+            ('initial', 'Initial'),
+            ('return', 'Return'),
+            ('preventive', 'Preventive'),
+            ('emergent', 'Emergent')
+        ],
+        required=True)
+
+    currency_id = fields.Many2one(
+        comodel_name='res.currency',
+        default='base.USD',
+        required=True,
     )
+
+    visit_cost = fields.Monetary(
+        currency_field='currency_id',
+    )
+
+    diagnosis_ids = fields.One2many(
+        comodel_name='hr.hospital.diagnosis',
+        inverse_name='visit_id',
+        string='Diagnosis',
+    )
+
+    recommendations = fields.Html()

@@ -1,21 +1,108 @@
 <odoo noupdate="1">
     <data>
-        <record id="hr_hospital_disease_depression" model="hr.hospital.disease">
-            <field name="name">Depression</field>
-            <field name="description">A common serious mood disorder.</field>
-            <field name="is_contagious">False</field>
+        <record id="hr_hospital_disease_infectious" model="hr.hospital.disease">
+            <field name="name">Infectious Diseases</field>
+            <field name="danger_level">high</field>
+            <field name="is_contagious">True</field>
+            <field name="icd_10">A00-B99</field>
+            <field name="region_ids" eval="[(4, ref('base.ua')), (4, ref('base.us'))]"/>
         </record>
 
-        <record id="hr_hospital_disease_gastritis" model="hr.hospital.disease">
-            <field name="name">Gastritis</field>
-            <field name="description">An inflammation of the lining of the stomach.</field>
-            <field name="is_contagious">False</field>
+        <record id="hr_hospital_disease_viral" model="hr.hospital.disease">
+            <field name="name">Viral Infections</field>
+            <field name="parent_id" ref="hr_hospital_disease_infectious"/>
+            <field name="danger_level">medium</field>
+            <field name="is_contagious">True</field>
+            <field name="icd_10">B34</field>
         </record>
 
         <record id="hr_hospital_disease_flu" model="hr.hospital.disease">
-            <field name="name">Flu</field>
-            <field name="description">A respiratory infection.</field>
+            <field name="name">Influenza (Flu)</field>
+            <field name="parent_id" ref="hr_hospital_disease_viral"/>
+            <field name="description">A highly contagious viral infection of the nose, throat, and lungs.</field>
+            <field name="symptoms">High fever, headache, extreme fatigue, dry cough, sore throat, muscle aches.</field>
+            <field name="danger_level">medium</field>
             <field name="is_contagious">True</field>
+            <field name="icd_10">J10</field>
+            <field name="region_ids" eval="[(4, ref('base.uk')), (4, ref('base.fr'))]"/>
+        </record>
+
+        <record id="hr_hospital_disease_covid" model="hr.hospital.disease">
+            <field name="name">COVID-19</field>
+            <field name="parent_id" ref="hr_hospital_disease_viral"/>
+            <field name="danger_level">critical</field>
+            <field name="is_contagious">True</field>
+            <field name="icd_10">U07.1</field>
+            <field name="region_ids" eval="[(4, ref('base.cn')), (4, ref('base.it'))]"/>
+        </record>
+
+        <record id="hr_hospital_disease_heart" model="hr.hospital.disease">
+            <field name="name">Cardiovascular Diseases</field>
+            <field name="danger_level">high</field>
+            <field name="icd_10">I00-I99</field>
+        </record>
+
+        <record id="hr_hospital_disease_ischemic" model="hr.hospital.disease">
+            <field name="name">Ischemic Heart Disease</field>
+            <field name="parent_id" ref="hr_hospital_disease_heart"/>
+            <field name="description">Occurs when plaque buildup narrows coronary arteries.</field>
+            <field name="symptoms">Chest pain or pressure (angina), shortness of breath, palpitations, dizziness.</field>
+            <field name="danger_level">critical</field>
+            <field name="icd_10">I20</field>
+            <field name="region_ids" eval="[(4, ref('base.de')), (4, ref('base.pl'))]"/>
+        </record>
+
+        <record id="hr_hospital_disease_hypertension" model="hr.hospital.disease">
+            <field name="name">Hypertension</field>
+            <field name="parent_id" ref="hr_hospital_disease_heart"/>
+            <field name="description">A chronic condition where blood consistently forces against artery walls too strongly.</field>
+            <field name="symptoms">Severe headaches, Shortness of breath.</field>
+            <field name="danger_level">medium</field>
+            <field name="icd_10">I10</field>
+        </record>
+
+        <record id="hr_hospital_disease_tropical" model="hr.hospital.disease">
+            <field name="name">Tropical Diseases</field>
+            <field name="danger_level">high</field>
+            <field name="region_ids" eval="[(4, ref('base.br')), (4, ref('base.in'))]"/>
+        </record>
+
+        <record id="hr_hospital_disease_malaria" model="hr.hospital.disease">
+            <field name="name">Malaria</field>
+            <field name="parent_id" ref="hr_hospital_disease_tropical"/>
+            <field name="description">A life-threatening disease caused by Plasmodium parasites.</field>
+            <field name="symptoms">High fever, cold/shivering, and heavy sweats.</field>
+            <field name="danger_level">critical</field>
+            <field name="is_contagious">False</field>
+            <field name="icd_10">B50</field>
+            <field name="region_ids" eval="[(4, ref('base.eg')), (4, ref('base.ng'))]"/>
+        </record>
+
+        <record id="hr_hospital_disease_dengue" model="hr.hospital.disease">
+            <field name="name">Dengue Fever</field>
+            <field name="parent_id" ref="hr_hospital_disease_tropical"/>
+            <field name="description">A mosquito-borne disease caused by dengue virus.</field>
+            <field name="symptoms">High fever, Nausea, vomiting, and swollen glands.</field>
+            <field name="danger_level">high</field>
+            <field name="is_contagious">True</field>
+            <field name="icd_10">A90</field>
+            <field name="region_ids" eval="[(4, ref('base.th')), (4, ref('base.vn'))]"/>
+        </record>
+
+        <record id="hr_hospital_disease_respiratory" model="hr.hospital.disease">
+            <field name="name">Respiratory Diseases</field>
+            <field name="danger_level">medium</field>
+            <field name="icd_10">J00-J99</field>
+        </record>
+
+        <record id="hr_hospital_disease_asthma" model="hr.hospital.disease">
+            <field name="name">Asthma</field>
+            <field name="description">A chronic inflammatory lung disease that causes airways to swell.</field>
+            <field name="symptoms">Wheezing, Shortness of breath, Chest tightness or pain.</field>
+            <field name="parent_id" ref="hr_hospital_disease_respiratory"/>
+            <field name="danger_level">low</field>
+            <field name="icd_10">J45</field>
+            <field name="region_ids" eval="[(4, ref('base.ca')), (4, ref('base.au'))]"/>
         </record>
     </data>
 </odoo>

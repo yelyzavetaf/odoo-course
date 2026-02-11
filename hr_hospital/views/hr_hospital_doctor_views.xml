@@ -5,8 +5,12 @@
             <field name="model">hr.hospital.doctor</field>
             <field name="arch" type="xml">
                 <list string="Doctors">
-                    <field name="name"/>
-                    <field name="specialization"/>
+                    <field name="full_name"/>
+                    <field name="speciality_id"/>
+                    <field name="licence_number"/>
+                    <field name="is_intern"/>
+                    <field name="experience"/>
+                    <field name="rating" widget="float" options="{'digits': [3, 2]}"/>
                 </list>
             </field>
         </record>
@@ -19,10 +23,20 @@
                     <sheet>
                         <group>
                             <group>
-                                <field name="name"/>
-                                <field name="specialization"/>
+                                <field name="last_name"/>
+                                <field name="first_name"/>
+                                <field name="middle_name"/>
+                                <field name="speciality_id"/>
+                                <field name="is_intern"/>
+                                <field name="mentor_id" invisible="not is_intern"/>
+                                <field name="licence_number"/>
+                                <field name="licence_issued_date"/>
+                                <field name="experience"/>
+                                <field name="education_country_id"/>
+                                <field name="rating" widget="float" options="{'digits': [3, 2]}"/>
                             </group>
                             <group>
+                                <field name="phone_number"/>
                                 <field name="patient_ids">Patients</field>
                             </group>
                         </group>

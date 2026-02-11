@@ -5,10 +5,16 @@
             <field name="model">hr.hospital.visit</field>
             <field name="arch" type="xml">
                 <list string="Visits">
-                    <field name="visit_date"/>
+                    <field name="planned_date"/>
+                    <field name="actual_date" readonly="visit_status != 'done'"/>
+                    <field name="visit_status"/>
                     <field name="doctor_id"/>
                     <field name="patient_id"/>
-                    <field name="diagnose_id"/>
+                    <field name="visit_type"/>
+                    <field name="currency_id"/>
+                    <field name="visit_cost"/>
+                    <field name="diagnosis_ids"/>
+                    <field name="recommendations"/>
                 </list>
             </field>
         </record>
@@ -21,14 +27,23 @@
                     <sheet>
                         <group>
                             <group>
-                                <field name="visit_date"/>
+                                <field name="planned_date"/>
+                                <field name="visit_status"/>
                                 <field name="doctor_id"/>
                             </group>
                             <group>
                                 <field name="patient_id"/>
-                                <field name="diagnose_id"/>
+                                <field name="visit_type"/>
+                                <field name="currency_id"/>
+                                <field name="visit_cost"/>
+                                <field name="diagnosis_ids"/>
                             </group>
                         </group>
+                        <notebook>
+                            <page name="Recommendations">
+                                <field name="recommendations" placeholder="Describe recommendations for the patient."/>
+                            </page>
+                        </notebook>
                     </sheet>
                 </form>
             </field>

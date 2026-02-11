@@ -1,18 +1,156 @@
 <odoo>
     <data>
         <record id="demo_hr_hospital_doctor_cooper" model="hr.hospital.doctor">
-            <field name="name">John Cooper</field>
-            <field name="specialization">Psychologist</field>
+            <field name="last_name">Cooper</field>
+            <field name="first_name">John</field>
+            <field name="middle_name">Avraam</field>
+            <field name="phone_number">0931306988</field>
+            <field name="email">john.cooper@mail.com</field>
+            <field name="sex">male</field>
+            <field name="birth_date">1993-10-19</field>
+            <field name="country_id" ref="base.us"/>
+            <field name="language_id" ref="base.lang_en"/>
+            <field name="user_id" ref="base.user_demo"/>
+            <field name="speciality_id" ref="demo_hrh_doctor_speciality_psychology"/>
+            <field name="is_intern">False</field>
+            <field name="licence_number">123123HY</field>
+            <field name="licence_issued_date">2013-10-19</field>
+            <field name="education_country_id" ref="base.us"/>
+            <field name="rating">4.55</field>
         </record>
 
         <record id="demo_hr_hospital_doctor_swanson" model="hr.hospital.doctor">
-            <field name="name">Emily Swanson</field>
-            <field name="specialization">Physician</field>
+            <field name="last_name">Swanson</field>
+            <field name="first_name">Emily</field>
+            <field name="middle_name">Bright</field>
+            <field name="phone_number">0788887466</field>
+            <field name="email">emily.swanson@med.it</field>
+            <field name="sex">female</field>
+            <field name="birth_date">1975-12-05</field>
+            <field name="country_id" ref="base.it"/>
+            <field name="language_id" ref="base.lang_en"/>
+            <field name="user_id" ref="base.user_demo"/>
+            <field name="speciality_id" ref="demo_hrh_doctor_speciality_gen_practice"/>
+            <field name="is_intern">False</field>
+            <field name="licence_number">666123HY</field>
+            <field name="licence_issued_date">1998-10-29</field>
+            <field name="education_country_id" ref="base.it"/>
+            <field name="rating">3.55</field>
         </record>
 
         <record id="demo_hr_hospital_doctor_mayer" model="hr.hospital.doctor">
-            <field name="name">Bred Mayer</field>
-            <field name="specialization">Gastroenterologist</field>
+            <field name="last_name">Mayer</field>
+            <field name="first_name">Bred</field>
+            <field name="middle_name">Stan</field>
+            <field name="phone_number">0676654433</field>
+            <field name="email">mayer.bred@berlin.de</field>
+            <field name="sex">male</field>
+            <field name="birth_date">1988-08-21</field>
+            <field name="country_id" ref="base.de"/>
+            <field name="language_id" ref="base.lang_en"/>
+            <field name="user_id" ref="base.user_demo"/>
+            <field name="speciality_id" ref="demo_hrh_doctor_speciality_gastroenterology"/>
+            <field name="is_intern">False</field>
+            <field name="licence_number">654123HY</field>
+            <field name="licence_issued_date">2005-12-09</field>
+            <field name="education_country_id" ref="base.de"/>
+            <field name="rating">5.00</field>
+        </record>
+
+        <record id="demo_hr_hospital_intern_racoon" model="hr.hospital.doctor">
+            <field name="last_name">Racoon</field>
+            <field name="first_name">Larry</field>
+            <field name="middle_name">Leo</field>
+            <field name="phone_number">0676554433</field>
+            <field name="email">racoon.larry@berlin.de</field>
+            <field name="sex">male</field>
+            <field name="birth_date">2000-08-21</field>
+            <field name="country_id" ref="base.de"/>
+            <field name="language_id" ref="base.lang_en"/>
+            <field name="user_id" ref="base.user_demo"/>
+            <field name="speciality_id" ref="demo_hrh_doctor_speciality_gastroenterology"/>
+            <field name="is_intern">True</field>
+            <field name="mentor_id" ref="demo_hr_hospital_doctor_mayer"/>
+            <field name="licence_number">334123HY</field>
+            <field name="licence_issued_date">2017-10-09</field>
+            <field name="education_country_id" ref="base.de"/>
+            <field name="rating">2.00</field>
+        </record>
+
+        <record id="demo_hr_hospital_intern_bentley" model="hr.hospital.doctor">
+            <field name="last_name">Bentley</field>
+            <field name="first_name">Garry</field>
+            <field name="middle_name">Jay</field>
+            <field name="phone_number">0676554773</field>
+            <field name="email">bentley.garry@berlin.de</field>
+            <field name="sex">male</field>
+            <field name="birth_date">2001-08-21</field>
+            <field name="country_id" ref="base.it"/>
+            <field name="language_id" ref="base.lang_en"/>
+            <field name="user_id" ref="base.user_demo"/>
+            <field name="speciality_id" ref="demo_hrh_doctor_speciality_gen_practice"/>
+            <field name="is_intern">True</field>
+            <field name="mentor_id" ref="demo_hr_hospital_doctor_swanson"/>
+            <field name="licence_number">554123HY</field>
+            <field name="licence_issued_date">2022-10-29</field>
+            <field name="education_country_id" ref="base.it"/>
+            <field name="rating">2.00</field>
+        </record>
+
+        <record id="demo_hr_hospital_doctor_king" model="hr.hospital.doctor">
+            <field name="last_name">King</field>
+            <field name="first_name">Mike</field>
+            <field name="middle_name">Kay</field>
+            <field name="phone_number">0954406988</field>
+            <field name="email">king.mike@mail.com</field>
+            <field name="sex">male</field>
+            <field name="birth_date">1985-10-19</field>
+            <field name="country_id" ref="base.us"/>
+            <field name="language_id" ref="base.lang_en"/>
+            <field name="user_id" ref="base.user_demo"/>
+            <field name="speciality_id" ref="demo_hrh_doctor_speciality_oral_surgery"/>
+            <field name="is_intern">False</field>
+            <field name="licence_number">888123HY</field>
+            <field name="licence_issued_date">2007-10-19</field>
+            <field name="education_country_id" ref="base.us"/>
+            <field name="rating">4.05</field>
+        </record>
+
+        <record id="demo_hr_hospital_doctor_brooks" model="hr.hospital.doctor">
+            <field name="last_name">Brooks</field>
+            <field name="first_name">Clara</field>
+            <field name="middle_name">May</field>
+            <field name="phone_number">0954407778</field>
+            <field name="email">brooks.km@mail.com</field>
+            <field name="sex">male</field>
+            <field name="birth_date">1989-11-19</field>
+            <field name="country_id" ref="base.us"/>
+            <field name="language_id" ref="base.lang_en"/>
+            <field name="user_id" ref="base.user_demo"/>
+            <field name="speciality_id" ref="demo_hrh_doctor_speciality_optometry"/>
+            <field name="is_intern">False</field>
+            <field name="licence_number">778123HY</field>
+            <field name="licence_issued_date">2009-05-11</field>
+            <field name="education_country_id" ref="base.us"/>
+            <field name="rating">4.95</field>
+        </record>
+
+        <record id="demo_hr_hospital_doctor_brooks" model="hr.hospital.doctor">
+            <field name="last_name">Tiffany</field>
+            <field name="first_name">Nancy</field>
+            <field name="phone_number">0954433378</field>
+            <field name="email">nancy.tiffany@mail.com</field>
+            <field name="sex">male</field>
+            <field name="birth_date">2001-03-29</field>
+            <field name="country_id" ref="base.us"/>
+            <field name="language_id" ref="base.lang_en"/>
+            <field name="user_id" ref="base.user_demo"/>
+            <field name="speciality_id" ref="demo_hrh_doctor_speciality_optometry"/>
+            <field name="is_intern">False</field>
+            <field name="licence_number">775523HY</field>
+            <field name="licence_issued_date">2023-05-11</field>
+            <field name="education_country_id" ref="base.us"/>
+            <field name="rating">3.65</field>
         </record>
     </data>
 </odoo>

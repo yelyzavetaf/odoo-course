@@ -1,0 +1,33 @@
+<odoo>
+    <data>
+        <record id="demo_hrh_doctor_speciality_psychology" model="hr.hospital.doctor.speciality">
+            <field name="name">Psychologist</field>
+            <field name="speciality_code">103T00000X</field>
+            <field name="description">Behavioral Health and Social Service Providers</field>
+        </record>
+
+        <record id="demo_hrh_doctor_speciality_gen_practice" model="hr.hospital.doctor.speciality">
+            <field name="name">General Practice</field>
+            <field name="speciality_code">208D00000X</field>
+            <field name="description">Allopathic/Osteopathic Physicians</field>
+        </record>
+
+        <record id="demo_hrh_doctor_speciality_gastroenterology" model="hr.hospital.doctor.speciality">
+            <field name="name">Gastroenterology</field>
+            <field name="speciality_code">207RG0100X</field>
+            <field name="description">Digestive Issues Providers</field>
+        </record>
+
+        <record id="demo_hrh_doctor_speciality_oral_surgery" model="hr.hospital.doctor.speciality">
+            <field name="name">Oral Surgery</field>
+            <field name="speciality_code">1223S0112X</field>
+            <field name="description">Dental Providers</field>
+        </record>
+
+        <record id="demo_hrh_doctor_speciality_optometry" model="hr.hospital.doctor.speciality">
+            <field name="name">Optometry</field>
+            <field name="speciality_code">152W00000X</field>
+            <field name="description">Eye and Vision Service Providers</field>
+        </record>
+    </data>
+</odoo>

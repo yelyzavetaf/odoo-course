@@ -5,10 +5,14 @@
             <field name="model">hr.hospital.patient</field>
             <field name="arch" type="xml">
                 <list string="Patients">
-                    <field name="name"/>
+                    <field name="full_name"/>
                     <field name="sex"/>
-                    <field name="complains"/>
+                    <field name="age"/>
+                    <field name="passport_data"/>
+                    <field name="blood_type"/>
                     <field name="doctor_id"/>
+                    <field name="insurance_company_id"/>
+                    <field name="insurance_number"/>
                 </list>
             </field>
         </record>
@@ -21,12 +25,21 @@
                     <sheet>
                         <group>
                             <group>
-                                <field name="name"/>
+                                <field name="last_name"/>
+                                <field name="first_name"/>
+                                <field name="middle_name"/>
                                 <field name="sex"/>
+                                <field name="birth_date"/>
+                                <field name="age"/>
+                                <field name="blood_type"/>
                             </group>
                             <group>
-                                <field name="complains"/>
+                                <field name="passport_data"/>
+                                <field name="phone_number"/>
                                 <field name="doctor_id"/>
+                                <field name="contact_id"/>
+                                <field name="insurance_company_id"/>
+                                <field name="insurance_number"/>
                             </group>
                         </group>
                     </sheet>

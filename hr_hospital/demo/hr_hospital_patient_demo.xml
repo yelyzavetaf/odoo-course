@@ -1,24 +1,241 @@
 <odoo>
     <data>
         <record id="demo_hr_hospital_patient_ross" model="hr.hospital.patient">
-            <field name="name">Bob Ross</field>
+            <field name="first_name">Bob</field>
+            <field name="last_name">Ross</field>
+            <field name="middle_name">Joe</field>
             <field name="sex">male</field>
-            <field name="complains">Bad mood</field>
+            <field name="phone_number">0951377988</field>
+            <field name="email">bob.ross@mail.com</field>
+            <field name="birth_date">1963-05-29</field>
+            <field name="country_id" ref="base.us"/>
+            <field name="language_id" ref="base.lang_en"/>
+            <field name="passport_data">XT123456OP</field>
             <field name="doctor_id" ref="demo_hr_hospital_doctor_cooper"/>
+            <field name="contact_id" ref="demo_hr_hospital_contact_schmidt"/>
+            <field name="blood_type">0(i)-</field>
+            <field name="passport_data">PO855789JH</field>
+            <field name="allergies">Almond, gluten</field>
+            <field name="insurance_company_id" ref="base.res_partner_5"/>
+            <field name="insurance_number">IUY8997111199008</field>
         </record>
 
         <record id="demo_hr_hospital_patient_lorem" model="hr.hospital.patient">
-            <field name="name">Kate Lorem</field>
+            <field name="first_name">Kate</field>
+            <field name="last_name">Lorem</field>
+            <field name="middle_name">Laura</field>
             <field name="sex">female</field>
-            <field name="complains">Stomach pain</field>
+            <field name="phone_number">0971300088</field>
+            <field name="email">kate.lorem@mail.com</field>
+            <field name="birth_date">2003-12-31</field>
+            <field name="country_id" ref="base.us"/>
+            <field name="language_id" ref="base.lang_en"/>
+            <field name="passport_data">UY765432KL</field>
             <field name="doctor_id" ref="demo_hr_hospital_doctor_mayer"/>
+            <field name="contact_id" ref="demo_hr_hospital_contact_tanaka"/>
+            <field name="blood_type">0(i)+</field>
+            <field name="passport_data">YU888789GM</field>
+            <field name="insurance_company_id" ref="base.res_partner_10"/>
+            <field name="insurance_number">IUY8997733098808</field>
         </record>
 
         <record id="demo_hr_hospital_patient_thomson" model="hr.hospital.patient">
-            <field name="name">Mary Thomson</field>
+            <field name="first_name">Mary</field>
+            <field name="last_name">Thomson</field>
+            <field name="middle_name">Lily</field>
             <field name="sex">female</field>
-            <field name="complains">Running nose</field>
+            <field name="phone_number">0661309668</field>
+            <field name="email">mary.thomson@mail.com</field>
+            <field name="birth_date">1981-11-05</field>
+            <field name="country_id" ref="base.us"/>
+            <field name="language_id" ref="base.lang_en"/>
+            <field name="passport_data">PL987635LK</field>
             <field name="doctor_id" ref="demo_hr_hospital_doctor_swanson"/>
+            <field name="contact_id" ref="demo_hr_hospital_contact_rossi"/>
+            <field name="blood_type">ab(iv)-</field>
+            <field name="passport_data">PO876789GT</field>
+            <field name="insurance_company_id" ref="base.res_partner_5"/>
+            <field name="insurance_number">IUY8997733999008</field>
+        </record>
+
+         <record id="demo_hr_hospital_patient_wonderland" model="hr.hospital.patient">
+            <field name="first_name">Alice</field>
+            <field name="last_name">Wonderland</field>
+            <field name="sex">female</field>
+            <field name="phone_number">0501112233</field>
+            <field name="email">alice.w@mail.com</field>
+            <field name="birth_date">1995-04-12</field>
+            <field name="country_id" ref="base.us"/>
+            <field name="language_id" ref="base.lang_en"/>
+            <field name="doctor_id" ref="demo_hr_hospital_doctor_cooper"/>
+            <field name="contact_id" ref="demo_hr_hospital_contact_miller"/>
+            <field name="blood_type">a(ii)+</field>
+            <field name="passport_data">AA12345678</field>
+            <field name="allergies">Peanuts</field>
+        </record>
+
+        <record id="demo_hr_hospital_patient_patrenko" model="hr.hospital.patient">
+            <field name="first_name">Ivan</field>
+            <field name="last_name">Petrenko</field>
+            <field name="middle_name">Ivanovych</field>
+            <field name="sex">male</field>
+            <field name="phone_number">0679998877</field>
+            <field name="email">i.petrenko@ukr.net</field>
+            <field name="birth_date">1988-08-24</field>
+            <field name="country_id" ref="base.ua"/>
+            <field name="language_id" ref="base.lang_uk_UA"/>
+            <field name="doctor_id" ref="demo_hr_hospital_doctor_cooper"/>
+            <field name="contact_id" ref="demo_hr_hospital_contact_swanson"/>
+            <field name="blood_type">b(iii)-</field>
+            <field name="passport_data">ММ98765444</field>
+            <field name="insurance_company_id" ref="base.res_partner_12"/>
+            <field name="insurance_number">IUY8997116699008</field>
+        </record>
+
+        <record id="demo_hr_hospital_patient_doe" model="hr.hospital.patient">
+            <field name="first_name">John</field>
+            <field name="last_name">Doe</field>
+            <field name="sex">male</field>
+            <field name="phone_number">0931234567</field>
+            <field name="birth_date">1975-01-10</field>
+            <field name="country_id" ref="base.ca"/>
+            <field name="doctor_id" ref="demo_hr_hospital_doctor_cooper"/>
+            <field name="contact_id" ref="demo_hr_hospital_contact_rossi"/>
+            <field name="blood_type">0(i)+</field>
+            <field name="insurance_company_id" ref="base.res_partner_5"/>
+            <field name="insurance_number">IUY8997113439008</field>
+        </record>
+
+        <record id="demo_hr_hospital_patient_garcia" model="hr.hospital.patient">
+            <field name="first_name">Maria</field>
+            <field name="last_name">Garcia</field>
+            <field name="sex">female</field>
+            <field name="phone_number">0995550011</field>
+            <field name="email">m.garcia@es.com</field>
+            <field name="birth_date">2000-12-05</field>
+            <field name="country_id" ref="base.it"/>
+            <field name="doctor_id" ref="demo_hr_hospital_doctor_cooper"/>
+            <field name="contact_id" ref="demo_hr_hospital_contact_schmidt"/>
+            <field name="blood_type">ab(iv)+</field>
+            <field name="allergies">Lactose</field>
+            <field name="insurance_company_id" ref="base.res_partner_10"/>
+            <field name="insurance_number">IUY8997111229008</field>
+        </record>
+
+        <record id="demo_hr_hospital_patient_sato" model="hr.hospital.patient">
+            <field name="first_name">Yuki</field>
+            <field name="last_name">Sato</field>
+            <field name="sex">female</field>
+            <field name="phone_number">0637778899</field>
+            <field name="birth_date">1992-03-15</field>
+            <field name="country_id" ref="base.jp"/>
+            <field name="doctor_id" ref="demo_hr_hospital_doctor_cooper"/>
+            <field name="contact_id" ref="demo_hr_hospital_contact_tanaka"/>
+            <field name="blood_type">ab(iv)-</field>
+            <field name="insurance_company_id" ref="base.res_partner_12"/>
+            <field name="insurance_number">IY77997111199008</field>
+        </record>
+
+        <record id="demo_hr_hospital_patient_smith" model="hr.hospital.patient">
+            <field name="first_name">Robert</field>
+            <field name="last_name">Smith</field>
+            <field name="sex">male</field>
+            <field name="phone_number">0502223344</field>
+            <field name="birth_date">1980-06-20</field>
+            <field name="country_id" ref="base.us"/>
+            <field name="doctor_id" ref="demo_hr_hospital_doctor_swanson"/>
+            <field name="contact_id" ref="demo_hr_hospital_contact_swanson"/>
+            <field name="blood_type">ab(iv)+</field>
+            <field name="blood_type">ab(iv)+</field>
+        </record>
+
+        <record id="demo_hr_hospital_patient_kovalenko" model="hr.hospital.patient">
+            <field name="first_name">Olena</field>
+            <field name="last_name">Kovalenko</field>
+            <field name="sex">female</field>
+            <field name="phone_number">0673334455</field>
+            <field name="birth_date">1998-02-28</field>
+            <field name="country_id" ref="base.ua"/>
+            <field name="doctor_id" ref="demo_hr_hospital_doctor_swanson"/>
+            <field name="contact_id" ref="demo_hr_hospital_contact_miller"/>
+            <field name="allergies">Penicillin</field>
+            <field name="blood_type">ab(iv)+</field>
+            <field name="insurance_company_id" ref="base.res_partner_12"/>
+            <field name="insurance_number">RP77997111199008</field>
+        </record>
+
+        <record id="demo_hr_hospital_patient_muller" model="hr.hospital.patient">
+            <field name="first_name">Hans</field>
+            <field name="last_name">Muller</field>
+            <field name="sex">male</field>
+            <field name="phone_number">0934445566</field>
+            <field name="birth_date">1970-11-11</field>
+            <field name="country_id" ref="base.de"/>
+            <field name="doctor_id" ref="demo_hr_hospital_doctor_swanson"/>
+            <field name="contact_id" ref="demo_hr_hospital_contact_schmidt"/>
+            <field name="passport_data">BB95765444</field>
+            <field name="blood_type">ab(iv)-</field>
+            <field name="insurance_company_id" ref="base.res_partner_5"/>
+            <field name="insurance_number">RP77997111199099</field>
+        </record>
+
+        <record id="demo_hr_hospital_patient_martin" model="hr.hospital.patient">
+            <field name="first_name">Sophie</field>
+            <field name="last_name">Martin</field>
+            <field name="sex">female</field>
+            <field name="phone_number">0996667788</field>
+            <field name="birth_date">1985-09-09</field>
+            <field name="country_id" ref="base.fr"/>
+            <field name="doctor_id" ref="demo_hr_hospital_doctor_swanson"/>
+            <field name="contact_id" ref="demo_hr_hospital_contact_rossi"/>
+            <field name="passport_data">IU95765444</field>
+            <field name="blood_type">a(ii)+</field>
+            <field name="insurance_company_id" ref="base.res_partner_12"/>
+            <field name="insurance_number">OK77997111199008</field>
+        </record>
+
+        <record id="demo_hr_hospital_patient_uchiha" model="hr.hospital.patient">
+            <field name="first_name">Kenji</field>
+            <field name="last_name">Uchiha</field>
+            <field name="sex">male</field>
+            <field name="phone_number">0631110022</field>
+            <field name="birth_date">1993-07-07</field>
+            <field name="country_id" ref="base.jp"/>
+            <field name="doctor_id" ref="demo_hr_hospital_doctor_swanson"/>
+            <field name="contact_id" ref="demo_hr_hospital_contact_tanaka"/>
+            <field name="passport_data">LO98465444</field>
+            <field name="blood_type">a(ii)+</field>
+            <field name="insurance_company_id" ref="base.res_partner_10"/>
+            <field name="insurance_number">OK77337111199008</field>
+        </record>
+
+        <record id="demo_hr_hospital_patient_taylor" model="hr.hospital.patient">
+            <field name="first_name">Linda</field>
+            <field name="last_name">Taylor</field>
+            <field name="sex">female</field>
+            <field name="phone_number">0505556677</field>
+            <field name="birth_date">1968-05-15</field>
+            <field name="country_id" ref="base.us"/>
+            <field name="doctor_id" ref="demo_hr_hospital_doctor_mayer"/>
+            <field name="contact_id" ref="demo_hr_hospital_contact_miller"/>
+            <field name="blood_type">a(ii)-</field>
+            <field name="insurance_company_id" ref="base.res_partner_12"/>
+            <field name="insurance_number">YT77997111199008</field>
+        </record>
+
+        <record id="demo_hr_hospital_patient_vynnyk" model="hr.hospital.patient">
+            <field name="first_name">Oleg</field>
+            <field name="last_name">Vynnyk</field>
+            <field name="sex">male</field>
+            <field name="phone_number">0677770000</field>
+            <field name="birth_date">1973-07-31</field>
+            <field name="country_id" ref="base.ua"/>
+            <field name="doctor_id" ref="demo_hr_hospital_doctor_mayer"/>
+            <field name="contact_id" ref="demo_hr_hospital_contact_rossi"/>
+            <field name="allergies">Flowers</field>
+            <field name="blood_type">b(iii)-</field>
+            <field name="insurance_company_id" ref="base.res_partner_5"/>
+            <field name="insurance_number">YT73333111199008</field>
         </record>
     </data>
 </odoo>

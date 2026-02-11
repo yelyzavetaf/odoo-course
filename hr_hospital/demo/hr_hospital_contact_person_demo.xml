@@ -1,0 +1,63 @@
+<odoo>
+    <data>
+        <record id="demo_hr_hospital_contact_swanson" model="hr.hospital.contact.person">
+            <field name="first_name">Josh</field>
+            <field name="last_name">Swanson</field>
+            <field name="middle_name">Jay</field>
+            <field name="phone_number">0951309988</field>
+            <field name="email">josh.swanson@mail.com</field>
+            <field name="sex">male</field>
+            <field name="birth_date">1983-10-15</field>
+            <field name="country_id" ref="base.us"/>
+            <field name="language_id" ref="base.lang_en"/>
+        </record>
+
+        <record id="demo_hr_hospital_contact_miller" model="hr.hospital.contact.person">
+            <field name="first_name">Sarah</field>
+            <field name="last_name">Miller</field>
+            <field name="middle_name">Ann</field>
+            <field name="phone_number">0504445566</field>
+            <field name="email">s.miller@example.com</field>
+            <field name="sex">female</field>
+            <field name="birth_date">1998-03-12</field>
+            <field name="country_id" ref="base.us"/>
+            <field name="language_id" ref="base.lang_en"/>
+        </record>
+
+        <record id="demo_hr_hospital_contact_rossi" model="hr.hospital.contact.person">
+            <field name="first_name">Elena</field>
+            <field name="last_name">Rossi</field>
+            <field name="middle_name">Maria</field>
+            <field name="phone_number">0938887766</field>
+            <field name="email">elena.rossi@med.it</field>
+            <field name="sex">female</field>
+            <field name="birth_date">1973-11-05</field>
+            <field name="country_id" ref="base.it"/>
+            <field name="language_id" ref="base.lang_en"/>
+        </record>
+
+        <record id="demo_hr_hospital_contact_schmidt" model="hr.hospital.contact.person">
+            <field name="first_name">Hans</field>
+            <field name="last_name">Schmidt</field>
+            <field name="middle_name">Ulrich</field>
+            <field name="phone_number">0995554433</field>
+            <field name="email">h.schmidt@berlin.de</field>
+            <field name="sex">male</field>
+            <field name="birth_date">1978-08-25</field>
+            <field name="country_id" ref="base.de"/>
+            <field name="language_id" ref="base.lang_en"/>
+        </record>
+
+        <record id="demo_hr_hospital_contact_tanaka" model="hr.hospital.contact.person">
+            <field name="first_name">Yuki</field>
+            <field name="last_name">Tanaka</field>
+            <field name="middle_name">Kenji</field>
+            <field name="phone_number">0630009911</field>
+            <field name="email">y.tanaka@tokyo.jp</field>
+            <field name="sex">male</field>
+            <field name="birth_date">1993-10-25</field>
+            <field name="country_id" ref="base.jp"/>
+            <field name="language_id" ref="base.lang_en"/>
+        </record>
+    </data>
+</odoo>
