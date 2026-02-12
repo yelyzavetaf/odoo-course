@@ -1,0 +1,117 @@
+<odoo>
+    <data>
+        <record id="demo_hr_hospital_schedule_cooper_mon" model="hr.hospital.doctor.schedule">
+            <field name="doctor_schedule_id" ref="demo_hr_hospital_doctor_cooper"/>
+            <field name="day_of_week">monday</field>
+            <field name="date">2026-02-09</field>
+            <field name="start_time">08.0</field> <!-- 08:00 -->
+            <field name="end_time">14.0</field>   <!-- 14:00 -->
+            <field name="type">work</field>
+            <field name="notes">Working half of the day.</field>
+        </record>
+
+        <record id="demo_hr_hospital_schedule_swanson_mon" model="hr.hospital.doctor.schedule">
+            <field name="doctor_schedule_id" ref="demo_hr_hospital_doctor_swanson"/>
+            <field name="day_of_week">monday</field>
+            <field name="date">2026-02-09</field>
+            <field name="start_time">14.0</field>
+            <field name="end_time">20.0</field>
+            <field name="type">work</field>
+            <field name="notes">Working half of the day.</field>
+        </record>
+
+        <record id="demo_hr_hospital_schedule_mayer_tue" model="hr.hospital.doctor.schedule">
+            <field name="doctor_schedule_id" ref="demo_hr_hospital_doctor_mayer"/>
+            <field name="day_of_week">tuesday</field>
+            <field name="date">2026-02-10</field>
+            <field name="start_time">09.0</field>
+            <field name="end_time">17.0</field>
+            <field name="type">work</field>
+        </record>
+
+        <record id="demo_hr_hospital_schedule_racoon_tue" model="hr.hospital.doctor.schedule">
+            <field name="doctor_schedule_id" ref="demo_hr_hospital_intern_racoon"/>
+            <field name="day_of_week">tuesday</field>
+            <field name="date">2026-02-10</field>
+            <field name="start_time">08.5</field> <!-- 08:30 -->
+            <field name="end_time">12.5</field> <!-- 12:30 -->
+            <field name="type">work</field>
+            <field name="notes">Intern shift under supervision</field>
+        </record>
+
+        <record id="demo_hr_hospital_schedule_bentley_wed" model="hr.hospital.doctor.schedule">
+            <field name="doctor_schedule_id" ref="demo_hr_hospital_intern_bentley"/>
+            <field name="day_of_week">wednesday</field>
+            <field name="date">2026-02-11</field>
+            <field name="start_time">10.0</field>
+            <field name="end_time">18.0</field>
+            <field name="type">work</field>
+        </record>
+
+        <record id="demo_hr_hospital_schedule_king_wed" model="hr.hospital.doctor.schedule">
+            <field name="doctor_schedule_id" ref="demo_hr_hospital_doctor_king"/>
+            <field name="day_of_week">wednesday</field>
+            <field name="date">2026-02-11</field>
+            <field name="start_time">08.0</field>
+            <field name="end_time">16.0</field>
+            <field name="type">conference</field>
+            <field name="notes">Medical Summit 2026</field>
+        </record>
+
+        <record id="demo_hr_hospital_schedule_brooks_thu" model="hr.hospital.doctor.schedule">
+            <field name="doctor_schedule_id" ref="demo_hr_hospital_doctor_brooks"/>
+            <field name="day_of_week">thursday</field>
+            <field name="date">2026-02-12</field>
+            <field name="start_time">09.0</field>
+            <field name="end_time">13.0</field>
+            <field name="type">work</field>
+        </record>
+
+        <record id="demo_hr_hospital_schedule_tifanny_thu" model="hr.hospital.doctor.schedule">
+            <field name="doctor_schedule_id" ref="demo_hr_hospital_doctor_tifanny"/>
+            <field name="day_of_week">thursday</field>
+            <field name="date">2026-02-12</field>
+            <field name="start_time">13.0</field>
+            <field name="end_time">19.0</field>
+            <field name="type">work</field>
+        </record>
+
+        <record id="demo_hr_hospital_schedule_cooper_fri" model="hr.hospital.doctor.schedule">
+            <field name="doctor_schedule_id" ref="demo_hr_hospital_doctor_cooper"/>
+            <field name="day_of_week">friday</field>
+            <field name="date">2026-02-13</field>
+            <field name="start_time">08.0</field>
+            <field name="end_time">16.0</field>
+            <field name="type">sick</field>
+            <field name="notes">Flu recovery</field>
+        </record>
+
+        <record id="demo_hr_hospital_schedule_mayer_fri" model="hr.hospital.doctor.schedule">
+            <field name="doctor_schedule_id" ref="demo_hr_hospital_doctor_mayer"/>
+            <field name="day_of_week">friday</field>
+            <field name="date">2026-02-13</field>
+            <field name="start_time">09.0</field>
+            <field name="end_time">18.0</field>
+            <field name="type">work</field>
+        </record>
+
+        <record id="demo_hr_hospital_schedule_swanson_sat" model="hr.hospital.doctor.schedule">
+            <field name="doctor_schedule_id" ref="demo_hr_hospital_doctor_swanson"/>
+            <field name="day_of_week">saturday</field>
+            <field name="date">2026-02-14</field>
+            <field name="start_time">10.0</field>
+            <field name="end_time">15.0</field>
+            <field name="type">work</field>
+        </record>
+
+        <record id="demo_hr_hospital_schedule_king_sun" model="hr.hospital.doctor.schedule">
+            <field name="doctor_schedule_id" ref="demo_hr_hospital_doctor_king"/>
+            <field name="day_of_week">sunday</field>
+            <field name="date">2026-02-15</field>
+            <field name="start_time">00.0</field>
+            <field name="end_time">00.0</field>
+            <field name="type">vacation</field>
+            <field name="notes">Weekend rest</field>
+        </record>
+    </data>
+</odoo>

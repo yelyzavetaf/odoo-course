@@ -1,4 +1,8 @@
-from odoo import models, fields
+from datetime import datetime, time
+
+from odoo import api, models, fields
+
+from odoo.exceptions import UserError
 
 
 class HrHospitalVisit(models.Model):
@@ -62,4 +66,63 @@ class HrHospitalVisit(models.Model):
         string='Diagnosis',
     )
 
+    diagnosis_count = fields.Integer(
+        string='Number of Diagnoses',
+        compute='_compute_diagnosis_count',
+        store=True
+    )
+
     recommendations = fields.Html()
+
+    @api.depends('diagnosis_ids')
+    def _compute_diagnosis_count(self):
+        for visit in self:
+            visit.diagnosis_count = len(visit.diagnosis_ids)
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            patient_id = vals.get('patient_id')
+            doctor_id = vals.get('doctor_id')
+            planned_dt_str = vals.get('planned_date')
+
+            if patient_id and doctor_id and planned_dt_str:
+                planned_dt = fields.Datetime.to_datetime(planned_dt_str)
+
+                start_of_day = datetime.combine(planned_dt.date(), time.min)
+                end_of_day = datetime.combine(planned_dt.date(), time.max)
+
+                duplicate = self.search([
+                    ('patient_id', '=', patient_id),
+                    ('doctor_id', '=', doctor_id),
+                    ('active', '=', True),
+                    ('planned_date', '>=', start_of_day),
+                    ('planned_date', '<=', end_of_day),
+                ], limit=1)
+
+                if duplicate:
+                    doctor = self.env['hr.hospital.doctor'].browse(doctor_id)
+                    raise UserError((
+                        "Patient has already planned a visit to %s for (%s)."
+                    ) % (doctor.display_name, planned_dt.date()))
+        return super(HrHospitalVisit, self).create(vals_list)
+
+
+    def write(self, vals):
+        essential_fields = ['doctor_id', 'patient_id', 'planned_date', 'actual_date']
+        for visit in self:
+            if visit.actual_date:
+                if visit.actual_date.date() < fields.Date.context_today(self):
+                    if any(field in vals for field in essential_fields):
+                        raise UserError((
+                            "Updating visit (ID: %s) is not allowed, it is already finished."
+                        ) % visit.id)
+        return super(HrHospitalVisit, self).write(vals)
+
+    def unlink(self):
+        for visit in self:
+            if visit.diagnosis_ids:
+                raise UserError((
+                    "Removing visit (ID: %s) is not allowed because of diagnosis added."
+                ) % visit.id)
+        return super(HrHospitalVisit, self).unlink()

@@ -24,6 +24,10 @@
         "demo/hr_hospital_doctor_speciality_demo.xml",
         "demo/hr_hospital_doctor_demo.xml",
         "demo/hr_hospital_patient_demo.xml",
+        "demo/hr_hospital_visit_demo.xml",
+        "demo/hr_hospital_diagnosis_demo.xml",
+        "demo/hr_hospital_doctor_schedule_demo.xml",
+        "demo/hr_hospital_patient_doctor_history_demo.xml",
     ],
 
     'installable': True,

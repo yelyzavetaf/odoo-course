@@ -1,0 +1,67 @@
+<odoo>
+    <data>
+        <record id="demo_hr_hospital_hist_ross_cooper" model="hr.hospital.patient.doctor.history">
+            <field name="patient_history_id" ref="demo_hr_hospital_patient_ross"/>
+            <field name="doctor_history_id" ref="demo_hr_hospital_doctor_cooper"/>
+            <field name="assigned_date">2025-12-01</field>
+            <field name="reassigned_date">2026-01-15</field>
+            <field name="reassigned_reason">Doctor went on long-term conference.</field>
+        </record>
+
+        <record id="demo_hr_hospital_hist_lorem_swanson" model="hr.hospital.patient.doctor.history">
+            <field name="patient_history_id" ref="demo_hr_hospital_patient_lorem"/>
+            <field name="doctor_history_id" ref="demo_hr_hospital_doctor_swanson"/>
+            <field name="assigned_date">2025-12-10</field>
+        </record>
+
+        <record id="demo_hr_hospital_hist_thomson_mayer" model="hr.hospital.patient.doctor.history">
+            <field name="patient_history_id" ref="demo_hr_hospital_patient_thomson"/>
+            <field name="doctor_history_id" ref="demo_hr_hospital_doctor_mayer"/>
+            <field name="assigned_date">2025-12-15</field>
+        </record>
+
+        <record id="demo_hr_hospital_hist_wonderland_racoon" model="hr.hospital.patient.doctor.history">
+            <field name="patient_history_id" ref="demo_hr_hospital_patient_wonderland"/>
+            <field name="doctor_history_id" ref="demo_hr_hospital_intern_racoon"/>
+            <field name="assigned_date">2026-01-05</field>
+        </record>
+
+        <record id="demo_hr_hospital_hist_patrenko_bentley" model="hr.hospital.patient.doctor.history">
+            <field name="patient_history_id" ref="demo_hr_hospital_patient_patrenko"/>
+            <field name="doctor_history_id" ref="demo_hr_hospital_intern_bentley"/>
+            <field name="assigned_date">2026-01-12</field>
+            <field name="reassigned_date">2026-02-01</field>
+            <field name="reassigned_reason">Internship period ended for this department.</field>
+        </record>
+
+        <record id="demo_hr_hospital_hist_doe_king" model="hr.hospital.patient.doctor.history">
+            <field name="patient_history_id" ref="demo_hr_hospital_patient_doe"/>
+            <field name="doctor_history_id" ref="demo_hr_hospital_doctor_king"/>
+            <field name="assigned_date">2026-01-20</field>
+        </record>
+
+        <record id="demo_hr_hospital_hist_garcia_brooks" model="hr.hospital.patient.doctor.history">
+            <field name="patient_history_id" ref="demo_hr_hospital_patient_garcia"/>
+            <field name="doctor_history_id" ref="demo_hr_hospital_doctor_brooks"/>
+            <field name="assigned_date">2026-02-01</field>
+        </record>
+
+        <record id="demo_hr_hospital_hist_smith_tifanny" model="hr.hospital.patient.doctor.history">
+            <field name="patient_history_id" ref="demo_hr_hospital_patient_smith"/>
+            <field name="doctor_history_id" ref="demo_hr_hospital_doctor_tifanny"/>
+            <field name="assigned_date">2026-02-05</field>
+        </record>
+
+        <record id="demo_hr_hospital_hist_kovalenko_cooper" model="hr.hospital.patient.doctor.history">
+            <field name="patient_history_id" ref="demo_hr_hospital_patient_kovalenko"/>
+            <field name="doctor_history_id" ref="demo_hr_hospital_doctor_cooper"/>
+            <field name="assigned_date">2026-02-10</field>
+        </record>
+
+        <record id="demo_hr_hospital_hist_ross_swanson_new" model="hr.hospital.patient.doctor.history">
+            <field name="patient_history_id" ref="demo_hr_hospital_patient_ross"/>
+            <field name="doctor_history_id" ref="demo_hr_hospital_doctor_swanson"/>
+            <field name="assigned_date">2026-01-16</field>
+        </record>
+    </data>
+</odoo>

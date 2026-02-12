@@ -3,7 +3,7 @@ from dateutil.relativedelta import relativedelta
 
 from odoo import api, models, fields
 
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError, ValidationError
 
 
 class HrHospitalDoctor(models.Model):
@@ -66,6 +66,11 @@ class HrHospitalDoctor(models.Model):
         default=3.00
     )
 
+    visits_ids = fields.One2many(
+        comodel_name='hr.hospital.visit',
+        inverse_name='doctor_id',
+    )
+
     @api.constrains('rating')
     def _check_rating_range(self):
         for rec in self:
@@ -93,3 +98,14 @@ class HrHospitalDoctor(models.Model):
                 raise ValidationError("Doctor can not be his/her own mentor.")
             if doctor.mentor_id.is_intern:
                 raise ValidationError("Intern can not be a mentor.")
+
+    def write(self, vals):
+        if 'active' in vals and not vals.get('active'):
+            for doctor in self:
+                if doctor.visits_ids:
+                    for visit in doctor.visits_ids:
+                        if visit.active:
+                            raise UserError(
+                                "Can not archive doctor with active visits."
+                            )
+        return super(HrHospitalDoctor, self).write(vals)

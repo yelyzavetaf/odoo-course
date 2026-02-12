@@ -28,7 +28,7 @@ class HrHospitalDiagnosis(models.Model):
         comodel_name='hr.hospital.doctor',
     )
 
-    approved_date = fields.Datetime(default=fields.Date.today())
+    approved_date = fields.Datetime()
 
     severity = fields.Selection(
         [

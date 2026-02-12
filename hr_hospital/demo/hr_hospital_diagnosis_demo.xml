@@ -1,0 +1,431 @@
+<odoo>
+    <data>
+        <record id="demo_hr_hospital_diagnosis_cooper_thomson_cov" model="hr.hospital.diagnosis">
+            <field name="visit_id" ref="demo_hr_hospital_visit_cooper_thomson"/>
+            <field name="disease_id" ref="hr_hospital_disease_covid"/>
+            <field name="description">The patient got infected at social event.</field>
+            <field name="approved">True</field>
+            <field name="approved_by" ref="demo_hr_hospital_doctor_cooper"/>
+            <field name="approved_date">2026-02-01</field>
+            <field name="severity">low</field>
+            <field name="prescribed_treatment"><![CDATA[
+                <h3 style="color: #2c3e50;">Recommended treatment:</h3>
+                <ul>
+                    <li><b>Stay indoors:</b> min 5 days.</li>
+                    <li><b>Water consumption:</b> at least 2 liters a day.</li>
+                    <li><b>Medications:</b>
+                        <ol>
+                            <li>Vitamin C (1000 mg)</li>
+                            <li>Paracetamol if the temperature is > 38.5°C</li>
+                        </ol>
+                    </li>
+                </ul>
+                <p style="background-color: #f8d7da; padding: 10px; border-radius: 5px;">
+                    <strong>Important:</strong> Return visit in 3 days!
+                </p>
+            ]]></field>
+        </record>
+
+        <record id="demo_hr_hospital_diagnosis_cooper_thomson_malaria" model="hr.hospital.diagnosis">
+            <field name="visit_id" ref="demo_hr_hospital_visit_cooper_thomson"/>
+            <field name="disease_id" ref="hr_hospital_disease_malaria"/>
+            <field name="description">The patient got infected during trip.</field>
+            <field name="approved">True</field>
+            <field name="approved_by" ref="demo_hr_hospital_doctor_cooper"/>
+            <field name="approved_date">2026-02-14</field>
+            <field name="severity">low</field>
+            <field name="prescribed_treatment"><![CDATA[
+                <h3 style="color: #2c3e50;">Recommended treatment:</h3>
+                <ul>
+                    <li><b>Stay indoors:</b> min 5 days.</li>
+                    <li><b>Water consumption:</b> at least 2 liters a day.</li>
+                    <li><b>Medications:</b>
+                        <ol>
+                            <li>Vitamin C (1000 mg)</li>
+                            <li>Paracetamol if the temperature is > 38.5°C</li>
+                        </ol>
+                    </li>
+                </ul>
+                <p style="background-color: #f8d7da; padding: 10px; border-radius: 5px;">
+                    <strong>Important:</strong> Return visit in 3 days!
+                </p>
+            ]]></field>
+        </record>
+
+        <record id="demo_hr_hospital_diagnosis_bentley_thomson_covid" model="hr.hospital.diagnosis">
+            <field name="visit_id" ref="demo_hr_hospital_visit_bentley_thomson"/>
+            <field name="disease_id" ref="hr_hospital_disease_covid"/>
+            <field name="description">The patient got infected at social event.</field>
+            <field name="severity">low</field>
+            <field name="prescribed_treatment"><![CDATA[
+                <h3 style="color: #2c3e50;">Recommended treatment:</h3>
+                <ul>
+                    <li><b>Stay indoors:</b> min 5 days.</li>
+                    <li><b>Water consumption:</b> at least 2 liters a day.</li>
+                    <li><b>Medications:</b>
+                        <ol>
+                            <li>Vitamin C (1000 mg)</li>
+                            <li>Paracetamol if the temperature is > 38.5°C</li>
+                        </ol>
+                    </li>
+                </ul>
+                <p style="background-color: #f8d7da; padding: 10px; border-radius: 5px;">
+                    <strong>Important:</strong> Return visit in 3 days!
+                </p>
+            ]]></field>
+        </record>
+
+        <record id="demo_hr_hospital_diagnosis_bentley_thomson_inf" model="hr.hospital.diagnosis">
+            <field name="visit_id" ref="demo_hr_hospital_visit_bentley_thomson"/>
+            <field name="disease_id" ref="hr_hospital_disease_infectious"/>
+            <field name="description">The patient seems fine.</field>
+            <field name="approved">True</field>
+            <field name="approved_by" ref="demo_hr_hospital_doctor_cooper"/>
+            <field name="approved_date">2026-02-21</field>
+            <field name="severity">low</field>
+            <field name="prescribed_treatment"><![CDATA[
+                <h3 style="color: #2c3e50;">Recommended treatment:</h3>
+                <ul>
+                    <li><b>Stay indoors:</b> min 5 days.</li>
+                    <li><b>Water consumption:</b> at least 2 liters a day.</li>
+                    <li><b>Medications:</b>
+                        <ol>
+                            <li>Vitamin C (1000 mg)</li>
+                            <li>Paracetamol if the temperature is > 38.5°C</li>
+                        </ol>
+                    </li>
+                </ul>
+                <p style="background-color: #f8d7da; padding: 10px; border-radius: 5px;">
+                    <strong>Important:</strong> Return visit in 3 days!
+                </p>
+            ]]></field>
+        </record>
+
+        <record id="demo_hr_hospital_diagnosis_cooper_thomson_hyper" model="hr.hospital.diagnosis">
+            <field name="visit_id" ref="demo_hr_hospital_visit_cooper_thomson"/>
+            <field name="disease_id" ref="hr_hospital_disease_hypertension"/>
+            <field name="description">The patient looks pale.</field>
+            <field name="approved">True</field>
+            <field name="approved_by" ref="demo_hr_hospital_doctor_cooper"/>
+            <field name="approved_date">2026-02-07</field>
+            <field name="severity">low</field>
+            <field name="prescribed_treatment"><![CDATA[
+                <h3 style="color: #2c3e50;">Recommended treatment:</h3>
+                <ul>
+                    <li><b>Stay indoors:</b> min 5 days.</li>
+                    <li><b>Water consumption:</b> at least 2 liters a day.</li>
+                    <li><b>Medications:</b>
+                        <ol>
+                            <li>Vitamin C (1000 mg)</li>
+                            <li>Paracetamol if the temperature is > 38.5°C</li>
+                        </ol>
+                    </li>
+                </ul>
+                <p style="background-color: #f8d7da; padding: 10px; border-radius: 5px;">
+                    <strong>Important:</strong> Return visit in 3 days!
+                </p>
+            ]]></field>
+        </record>
+
+        <record id="demo_hr_hospital_diagnosis_cooper_thomson_ischemic" model="hr.hospital.diagnosis">
+            <field name="visit_id" ref="demo_hr_hospital_visit_cooper_thomson"/>
+            <field name="disease_id" ref="hr_hospital_disease_ischemic"/>
+            <field name="description">The patient has ache.</field>
+            <field name="approved">True</field>
+            <field name="approved_by" ref="demo_hr_hospital_doctor_cooper"/>
+            <field name="approved_date">2026-02-18</field>
+            <field name="severity">critical</field>
+            <field name="prescribed_treatment"><![CDATA[
+                <h3 style="color: #2c3e50;">Recommended treatment:</h3>
+                <ul>
+                    <li><b>Stay indoors:</b> min 5 days.</li>
+                    <li><b>Water consumption:</b> at least 2 liters a day.</li>
+                    <li><b>Medications:</b>
+                        <ol>
+                            <li>Vitamin C (1000 mg)</li>
+                            <li>Paracetamol if the temperature is > 38.5°C</li>
+                        </ol>
+                    </li>
+                </ul>
+                <p style="background-color: #f8d7da; padding: 10px; border-radius: 5px;">
+                    <strong>Important:</strong> Return visit in 3 days!
+                </p>
+            ]]></field>
+        </record>
+
+        <record id="demo_hr_hospital_diagnosis_cooper_ross_return_flu" model="hr.hospital.diagnosis">
+            <field name="visit_id" ref="demo_hr_hospital_visit_cooper_ross_return"/>
+            <field name="disease_id" ref="hr_hospital_disease_flu"/>
+            <field name="description">The patient got infected at social event.</field>
+            <field name="approved">True</field>
+            <field name="approved_by" ref="demo_hr_hospital_doctor_cooper"/>
+            <field name="approved_date">2026-02-14</field>
+            <field name="severity">critical</field>
+            <field name="prescribed_treatment"><![CDATA[
+                <h3 style="color: #2c3e50;">Recommended treatment:</h3>
+                <ul>
+                    <li><b>Stay indoors:</b> min 5 days.</li>
+                    <li><b>Water consumption:</b> at least 2 liters a day.</li>
+                    <li><b>Medications:</b>
+                        <ol>
+                            <li>Vitamin C (1000 mg)</li>
+                            <li>Paracetamol if the temperature is > 38.5°C</li>
+                        </ol>
+                    </li>
+                </ul>
+                <p style="background-color: #f8d7da; padding: 10px; border-radius: 5px;">
+                    <strong>Important:</strong> Return visit in 3 days!
+                </p>
+            ]]></field>
+        </record>
+
+        <record id="demo_hr_hospital_diagnosis_cooper_thomson_ret_flu" model="hr.hospital.diagnosis">
+            <field name="visit_id" ref="demo_hr_hospital_visit_cooper_thomson_return"/>
+            <field name="disease_id" ref="hr_hospital_disease_flu"/>
+            <field name="description">The patient got infected at social event.</field>
+            <field name="approved">True</field>
+            <field name="approved_by" ref="demo_hr_hospital_doctor_cooper"/>
+            <field name="approved_date">2026-02-11</field>
+            <field name="severity">high</field>
+            <field name="prescribed_treatment"><![CDATA[
+                <h3 style="color: #2c3e50;">Recommended treatment:</h3>
+                <ul>
+                    <li><b>Stay indoors:</b> min 5 days.</li>
+                    <li><b>Water consumption:</b> at least 2 liters a day.</li>
+                    <li><b>Medications:</b>
+                        <ol>
+                            <li>Vitamin C (1000 mg)</li>
+                            <li>Paracetamol if the temperature is > 38.5°C</li>
+                        </ol>
+                    </li>
+                </ul>
+                <p style="background-color: #f8d7da; padding: 10px; border-radius: 5px;">
+                    <strong>Important:</strong> Return visit in 3 days!
+                </p>
+            ]]></field>
+        </record>
+
+        <record id="demo_hr_hospital_diagnosis_bentley_thomson_viral" model="hr.hospital.diagnosis">
+            <field name="visit_id" ref="demo_hr_hospital_visit_bentley_thomson"/>
+            <field name="disease_id" ref="hr_hospital_disease_viral"/>
+            <field name="description">The patient got infected at social event.</field>
+            <field name="approved">True</field>
+            <field name="approved_by" ref="demo_hr_hospital_doctor_mayer"/>
+            <field name="approved_date">2026-02-04</field>
+            <field name="severity">high</field>
+            <field name="prescribed_treatment"><![CDATA[
+                <h3 style="color: #2c3e50;">Recommended treatment:</h3>
+                <ul>
+                    <li><b>Stay indoors:</b> min 5 days.</li>
+                    <li><b>Water consumption:</b> at least 2 liters a day.</li>
+                    <li><b>Medications:</b>
+                        <ol>
+                            <li>Vitamin C (1000 mg)</li>
+                            <li>Paracetamol if the temperature is > 38.5°C</li>
+                        </ol>
+                    </li>
+                </ul>
+                <p style="background-color: #f8d7da; padding: 10px; border-radius: 5px;">
+                    <strong>Important:</strong> Return visit in 3 days!
+                </p>
+            ]]></field>
+        </record>
+
+        <record id="demo_hr_hospital_diagnosis_bentley_thomson_infectious" model="hr.hospital.diagnosis">
+            <field name="visit_id" ref="demo_hr_hospital_visit_bentley_thomson"/>
+            <field name="disease_id" ref="hr_hospital_disease_infectious"/>
+            <field name="description">The patient got infected at social event.</field>
+            <field name="approved">True</field>
+            <field name="approved_by" ref="demo_hr_hospital_doctor_swanson"/>
+            <field name="approved_date">2026-02-06</field>
+            <field name="severity">high</field>
+            <field name="prescribed_treatment"><![CDATA[
+                <h3 style="color: #2c3e50;">Recommended treatment:</h3>
+                <ul>
+                    <li><b>Stay indoors:</b> min 5 days.</li>
+                    <li><b>Water consumption:</b> at least 2 liters a day.</li>
+                    <li><b>Medications:</b>
+                        <ol>
+                            <li>Vitamin C (1000 mg)</li>
+                            <li>Paracetamol if the temperature is > 38.5°C</li>
+                        </ol>
+                    </li>
+                </ul>
+                <p style="background-color: #f8d7da; padding: 10px; border-radius: 5px;">
+                    <strong>Important:</strong> Return visit in 3 days!
+                </p>
+            ]]></field>
+        </record>
+
+        <record id="demo_hr_hospital_diagnosis_cooper_thomson_infectious" model="hr.hospital.diagnosis">
+            <field name="visit_id" ref="demo_hr_hospital_visit_cooper_thomson"/>
+            <field name="disease_id" ref="hr_hospital_disease_infectious"/>
+            <field name="description">The patient got infected at social event.</field>
+            <field name="approved">True</field>
+            <field name="approved_by" ref="demo_hr_hospital_doctor_cooper"/>
+            <field name="approved_date">2026-02-01</field>
+            <field name="severity">high</field>
+            <field name="prescribed_treatment"><![CDATA[
+                <h3 style="color: #2c3e50;">Recommended treatment:</h3>
+                <ul>
+                    <li><b>Stay indoors:</b> min 5 days.</li>
+                    <li><b>Water consumption:</b> at least 2 liters a day.</li>
+                    <li><b>Medications:</b>
+                        <ol>
+                            <li>Vitamin C (1000 mg)</li>
+                            <li>Paracetamol if the temperature is > 38.5°C</li>
+                        </ol>
+                    </li>
+                </ul>
+                <p style="background-color: #f8d7da; padding: 10px; border-radius: 5px;">
+                    <strong>Important:</strong> Return visit in 3 days!
+                </p>
+            ]]></field>
+        </record>
+
+        <record id="demo_hr_hospital_diagnosis_cooper_ross_tropical" model="hr.hospital.diagnosis">
+            <field name="visit_id" ref="demo_hr_hospital_visit_cooper_ross"/>
+            <field name="disease_id" ref="hr_hospital_disease_tropical"/>
+            <field name="description">The patient got infected at social event.</field>
+            <field name="approved">True</field>
+            <field name="approved_by" ref="demo_hr_hospital_doctor_swanson"/>
+            <field name="approved_date">2026-02-18</field>
+            <field name="severity">high</field>
+            <field name="prescribed_treatment"><![CDATA[
+                <h3 style="color: #2c3e50;">Recommended treatment:</h3>
+                <ul>
+                    <li><b>Stay indoors:</b> min 5 days.</li>
+                    <li><b>Water consumption:</b> at least 2 liters a day.</li>
+                    <li><b>Medications:</b>
+                        <ol>
+                            <li>Vitamin C (1000 mg)</li>
+                            <li>Paracetamol if the temperature is > 38.5°C</li>
+                        </ol>
+                    </li>
+                </ul>
+                <p style="background-color: #f8d7da; padding: 10px; border-radius: 5px;">
+                    <strong>Important:</strong> Return visit in 3 days!
+                </p>
+            ]]></field>
+        </record>
+
+        <record id="demo_hr_hospital_diagnosis_cooper_ross_malaria" model="hr.hospital.diagnosis">
+            <field name="visit_id" ref="demo_hr_hospital_visit_cooper_ross"/>
+            <field name="disease_id" ref="hr_hospital_disease_malaria"/>
+            <field name="description">The patient got infected at social event.</field>
+            <field name="approved">True</field>
+            <field name="approved_by" ref="demo_hr_hospital_doctor_cooper"/>
+            <field name="approved_date">2026-02-19</field>
+            <field name="severity">medium</field>
+            <field name="prescribed_treatment"><![CDATA[
+                <h3 style="color: #2c3e50;">Recommended treatment:</h3>
+                <ul>
+                    <li><b>Stay indoors:</b> min 5 days.</li>
+                    <li><b>Water consumption:</b> at least 2 liters a day.</li>
+                    <li><b>Medications:</b>
+                        <ol>
+                            <li>Vitamin C (1000 mg)</li>
+                            <li>Paracetamol if the temperature is > 38.5°C</li>
+                        </ol>
+                    </li>
+                </ul>
+                <p style="background-color: #f8d7da; padding: 10px; border-radius: 5px;">
+                    <strong>Important:</strong> Return visit in 3 days!
+                </p>
+            ]]></field>
+        </record>
+
+        <record id="demo_hr_hospital_diagnosis_bentley_thomson" model="hr.hospital.diagnosis">
+            <field name="visit_id" ref="demo_hr_hospital_visit_bentley_thomson"/>
+            <field name="disease_id" ref="hr_hospital_disease_dengue"/>
+            <field name="description">The patient got a mosqito bit.</field>
+            <field name="severity">medium</field>
+            <field name="prescribed_treatment"><![CDATA[
+                <h3 style="color: #2c3e50;">Recommended treatment:</h3>
+                <ul>
+                    <li><b>Stay indoors:</b> min 5 days.</li>
+                    <li><b>Water consumption:</b> at least 2 liters a day.</li>
+                    <li><b>Medications:</b>
+                        <ol>
+                            <li>Vitamin C (1000 mg)</li>
+                            <li>Paracetamol if the temperature is > 38.5°C</li>
+                        </ol>
+                    </li>
+                </ul>
+                <p style="background-color: #f8d7da; padding: 10px; border-radius: 5px;">
+                    <strong>Important:</strong> Return visit in 3 days!
+                </p>
+            ]]></field>
+        </record>
+
+        <record id="demo_hr_hospital_diagnosis_bentley_thomson_astma" model="hr.hospital.diagnosis">
+            <field name="visit_id" ref="demo_hr_hospital_visit_bentley_thomson"/>
+            <field name="disease_id" ref="hr_hospital_disease_asthma"/>
+            <field name="description">The patient can hardly breathe.</field>
+            <field name="severity">medium</field>
+            <field name="prescribed_treatment"><![CDATA[
+                <h3 style="color: #2c3e50;">Recommended treatment:</h3>
+                <ul>
+                    <li><b>Stay indoors:</b> min 5 days.</li>
+                    <li><b>Water consumption:</b> at least 2 liters a day.</li>
+                    <li><b>Medications:</b>
+                        <ol>
+                            <li>Vitamin C (1000 mg)</li>
+                            <li>Paracetamol if the temperature is > 38.5°C</li>
+                        </ol>
+                    </li>
+                </ul>
+                <p style="background-color: #f8d7da; padding: 10px; border-radius: 5px;">
+                    <strong>Important:</strong> Return visit in 3 days!
+                </p>
+            ]]></field>
+        </record>
+
+        <record id="demo_hr_hospital_diagnosis_racoon_wonderland_covid" model="hr.hospital.diagnosis">
+            <field name="visit_id" ref="demo_hr_hospital_visit_racoon_wonderland"/>
+            <field name="disease_id" ref="hr_hospital_disease_covid"/>
+            <field name="description">The patient got infected at social event.</field>
+            <field name="severity">medium</field>
+            <field name="prescribed_treatment"><![CDATA[
+                <h3 style="color: #2c3e50;">Recommended treatment:</h3>
+                <ul>
+                    <li><b>Stay indoors:</b> min 5 days.</li>
+                    <li><b>Water consumption:</b> at least 2 liters a day.</li>
+                    <li><b>Medications:</b>
+                        <ol>
+                            <li>Vitamin C (1000 mg)</li>
+                            <li>Paracetamol if the temperature is > 38.5°C</li>
+                        </ol>
+                    </li>
+                </ul>
+                <p style="background-color: #f8d7da; padding: 10px; border-radius: 5px;">
+                    <strong>Important:</strong> Return visit in 3 days!
+                </p>
+            ]]></field>
+        </record>
+
+        <record id="demo_hr_hospital_diagnosis_racoon_wonderland" model="hr.hospital.diagnosis">
+            <field name="visit_id" ref="demo_hr_hospital_visit_racoon_wonderland"/>
+            <field name="disease_id" ref="hr_hospital_disease_heart"/>
+            <field name="description">The patient heart ache.</field>
+            <field name="severity">low</field>
+            <field name="prescribed_treatment"><![CDATA[
+                <h3 style="color: #2c3e50;">Recommended treatment:</h3>
+                <ul>
+                    <li><b>Stay indoors:</b> min 5 days.</li>
+                    <li><b>Water consumption:</b> at least 2 liters a day.</li>
+                    <li><b>Medications:</b>
+                        <ol>
+                            <li>Vitamin C (1000 mg)</li>
+                            <li>Paracetamol if the temperature is > 38.5°C</li>
+                        </ol>
+                    </li>
+                </ul>
+                <p style="background-color: #f8d7da; padding: 10px; border-radius: 5px;">
+                    <strong>Important:</strong> Return visit in 3 days!
+                </p>
+            ]]></field>
+        </record>
+
+    </data>
+</odoo>

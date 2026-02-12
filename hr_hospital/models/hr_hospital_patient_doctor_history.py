@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from odoo import models, fields
+from odoo import api, models, fields
 
 
 class HrHospitalPatientDoctorHistory(models.Model):
@@ -24,3 +24,22 @@ class HrHospitalPatientDoctorHistory(models.Model):
     reassigned_date = fields.Date()
 
     reassigned_reason = fields.Text()
+
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            patient_id = vals.get('patient_history_id')
+            if patient_id:
+                previous_history = self.search([
+                    ('patient_history_id', '=', patient_id),
+                    ('active', '=', True)
+                ])
+                if previous_history:
+                    previous_history.write({
+                        'active': False,
+                        'reassigned_date': fields.Date.context_today(self),
+                        'reassigned_reason': 'Automated deactivation on new doctor assignment'
+                    })
+
+        return super(HrHospitalPatientDoctorHistory, self).create(vals_list)

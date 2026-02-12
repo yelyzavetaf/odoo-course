@@ -135,7 +135,7 @@
             <field name="rating">4.95</field>
         </record>
 
-        <record id="demo_hr_hospital_doctor_brooks" model="hr.hospital.doctor">
+        <record id="demo_hr_hospital_doctor_tifanny" model="hr.hospital.doctor">
             <field name="last_name">Tiffany</field>
             <field name="first_name">Nancy</field>
             <field name="phone_number">0954433378</field>

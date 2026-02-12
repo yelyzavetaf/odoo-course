@@ -67,3 +67,14 @@ class HrHospitalPatient(models.Model):
     def _compute_display_name(self):
         for patient in self:
             patient.display_name = patient.full_name
+
+    def write(self, vals):
+        if 'doctor_id' in vals:
+            for patient in self:
+                if patient.doctor_id.id != vals.get("doctor_id"):
+                    self.env['hr.hospital.patient.doctor.history'].create({
+                        'patient_id': patient.id,
+                        'doctor_id': vals.get("doctor_id"),
+                        'assigned_date': fields.Date.context_today(self),
+                    })
+        return super(HrHospitalPatient, self).write(vals)

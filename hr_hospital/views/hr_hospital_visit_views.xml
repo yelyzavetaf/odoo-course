@@ -13,6 +13,7 @@
                     <field name="visit_type"/>
                     <field name="currency_id"/>
                     <field name="visit_cost"/>
+                    <field name="diagnosis_count"/>
                     <field name="diagnosis_ids"/>
                     <field name="recommendations"/>
                 </list>
@@ -30,10 +31,10 @@
                                 <field name="planned_date"/>
                                 <field name="visit_status"/>
                                 <field name="doctor_id"/>
-                            </group>
-                            <group>
                                 <field name="patient_id"/>
                                 <field name="visit_type"/>
+                            </group>
+                            <group>
                                 <field name="currency_id"/>
                                 <field name="visit_cost"/>
                                 <field name="diagnosis_ids"/>

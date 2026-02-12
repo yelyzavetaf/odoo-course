@@ -52,5 +52,5 @@ class HrHospitalDisease(models.Model):
 
     @api.constrains('parent_id')
     def _check_hierarchy(self):
-        if not self._check_recursion():
+        if self._has_cycle():
             raise ValidationError('Recursive hierarchy created.')
