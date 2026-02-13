@@ -109,7 +109,7 @@
             <field name="day_of_week">sunday</field>
             <field name="date">2026-02-15</field>
             <field name="start_time">00.0</field>
-            <field name="end_time">00.0</field>
+            <field name="end_time">24.0</field>
             <field name="type">vacation</field>
             <field name="notes">Weekend rest</field>
         </record>

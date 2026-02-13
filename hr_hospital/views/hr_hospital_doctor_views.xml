@@ -37,6 +37,7 @@
                             </group>
                             <group>
                                 <field name="phone_number"/>
+                                <field name="birth_date"/>
                                 <field name="patient_ids">Patients</field>
                             </group>
                         </group>

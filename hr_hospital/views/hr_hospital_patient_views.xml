@@ -40,6 +40,8 @@
                                 <field name="contact_id"/>
                                 <field name="insurance_company_id"/>
                                 <field name="insurance_number"/>
+                                <field name="country_id"/>
+                                <field name="language_id"/>
                             </group>
                         </group>
                     </sheet>

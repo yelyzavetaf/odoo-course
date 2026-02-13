@@ -71,11 +71,15 @@ class HrHospitalDoctor(models.Model):
         inverse_name='doctor_id',
     )
 
-    @api.constrains('rating')
-    def _check_rating_range(self):
-        for rec in self:
-            if rec.rating < 0.00 or rec.rating > 5.00:
-                raise ValidationError("Rating should be from 0.00 to 5.00!")
+    _licence_number_unique = models.Constraint(
+        'unique(licence_number)',
+        'Doctor should have a unique licence number.'
+    )
+
+    _check_rating_range = models.Constraint(
+        'CHECK(rating <= 5.0 AND rating >= 0.0)',
+        'Doctor rating should be from 0.00 to 5.00'
+    )
 
     @api.depends('full_name')
     def _compute_display_name(self):
@@ -98,6 +102,17 @@ class HrHospitalDoctor(models.Model):
                 raise ValidationError("Doctor can not be his/her own mentor.")
             if doctor.mentor_id.is_intern:
                 raise ValidationError("Intern can not be a mentor.")
+
+    @api.onchange('is_intern')
+    def _onchange_is_intern(self):
+        if self.is_intern:
+            self.mentor_id = self.env['hr.hospital.doctor'].browse(2)
+            return {
+                'warning': {
+                    'title': "Intern was chosen",
+                    'message': "Mentor was assigned automatically",
+                }
+            }
 
     def write(self, vals):
         if 'active' in vals and not vals.get('active'):

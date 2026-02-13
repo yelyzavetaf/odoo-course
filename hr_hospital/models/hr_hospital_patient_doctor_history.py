@@ -25,7 +25,6 @@ class HrHospitalPatientDoctorHistory(models.Model):
 
     reassigned_reason = fields.Text()
 
-
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
@@ -39,7 +38,7 @@ class HrHospitalPatientDoctorHistory(models.Model):
                     previous_history.write({
                         'active': False,
                         'reassigned_date': fields.Date.context_today(self),
-                        'reassigned_reason': 'Automated deactivation on new doctor assignment'
+                        'reassigned_reason': 'New doctor assignment'
                     })
 
         return super(HrHospitalPatientDoctorHistory, self).create(vals_list)

@@ -40,3 +40,8 @@ class HrHospitalDoctorSchedule(models.Model):
     ])
 
     notes = fields.Char()
+
+    _check_start_end_time = models.Constraint(
+        'CHECK(start_time < end_time)',
+        'Schedule start time should earlier than end time.'
+    )

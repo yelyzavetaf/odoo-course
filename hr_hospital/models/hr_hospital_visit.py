@@ -79,6 +79,17 @@ class HrHospitalVisit(models.Model):
         for visit in self:
             visit.diagnosis_count = len(visit.diagnosis_ids)
 
+    @api.onchange('patient_id')
+    def _onchange_patient_id(self):
+        if self.patient_id and self.patient_id.allergies:
+            return {
+                'warning': {
+                    'title': "Warning",
+                    'message': "The chosen patient has allergies (%s)."
+                               % self.patient_id.allergies,
+                }
+            }
+
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
@@ -107,15 +118,16 @@ class HrHospitalVisit(models.Model):
                     ) % (doctor.display_name, planned_dt.date()))
         return super(HrHospitalVisit, self).create(vals_list)
 
-
     def write(self, vals):
-        essential_fields = ['doctor_id', 'patient_id', 'planned_date', 'actual_date']
+        essential_fields = [
+            'doctor_id', 'patient_id', 'planned_date', 'actual_date'
+        ]
         for visit in self:
             if visit.actual_date:
                 if visit.actual_date.date() < fields.Date.context_today(self):
                     if any(field in vals for field in essential_fields):
                         raise UserError((
-                            "Updating visit (ID: %s) is not allowed, it is already finished."
+                            "Updating past visit (ID: %s) is not allowed."
                         ) % visit.id)
         return super(HrHospitalVisit, self).write(vals)
 
@@ -123,6 +135,7 @@ class HrHospitalVisit(models.Model):
         for visit in self:
             if visit.diagnosis_ids:
                 raise UserError((
-                    "Removing visit (ID: %s) is not allowed because of diagnosis added."
+                    "Removing visit (ID: %s) is not allowed "
+                    "because of diagnosis added."
                 ) % visit.id)
         return super(HrHospitalVisit, self).unlink()

@@ -68,6 +68,25 @@ class HrHospitalPatient(models.Model):
         for patient in self:
             patient.display_name = patient.full_name
 
+    @api.onchange('country_id')
+    def _onchange_country_id(self):
+        if self.country_id:
+
+            country_code = self.country_id.code
+            lang = self.env['res.lang'].search([
+                ('code', 'ilike', country_code)
+            ], limit=1)
+
+            if lang:
+                self.language_id = lang
+                return {
+                    'warning': {
+                        'title': "Patient country was changed",
+                        'message': "Suggested language was updated "
+                                   "to %s" % lang.display_name,
+                    }
+                }
+
     def write(self, vals):
         if 'doctor_id' in vals:
             for patient in self:

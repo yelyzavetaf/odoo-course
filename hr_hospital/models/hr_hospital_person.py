@@ -42,6 +42,9 @@ class HrHospitalAbstractPerson(models.AbstractModel):
     language_id = fields.Many2one(
         comodel_name='res.lang',
         string='Communication Language',
+        default=lambda self: self.env.ref(
+            'base.lang_en_GB', raise_if_not_found=False
+        )
     )
 
     @api.constrains('phone_number')
