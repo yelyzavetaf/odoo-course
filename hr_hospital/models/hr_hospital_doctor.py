@@ -28,6 +28,7 @@ class HrHospitalDoctor(models.Model):
     mentor_id = fields.Many2one(
         comodel_name='hr.hospital.doctor',
         string='Mentor',
+        domain=[('is_intern', '=', False)],
     )
 
     patient_ids = fields.One2many(
@@ -114,13 +115,12 @@ class HrHospitalDoctor(models.Model):
                 }
             }
 
-    def write(self, vals):
-        if 'active' in vals and not vals.get('active'):
-            for doctor in self:
-                if doctor.visits_ids:
-                    for visit in doctor.visits_ids:
-                        if visit.active:
-                            raise UserError(
-                                "Can not archive doctor with active visits."
-                            )
-        return super(HrHospitalDoctor, self).write(vals)
+    def action_archive(self):
+        for doctor in self:
+            if doctor.visits_ids:
+                for visit in doctor.visits_ids:
+                    if visit.active:
+                        raise UserError(
+                            "Can not archive doctor with active visits."
+                        )
+        return super(HrHospitalDoctor, self).action_archive()

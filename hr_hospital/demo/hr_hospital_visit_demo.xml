@@ -110,8 +110,8 @@
 
         <record id="demo_hr_hospital_visit_cooper_ross_return" model="hr.hospital.visit">
             <field name="visit_status">done</field>
-            <field name="planned_date">2026-02-01</field>
-            <field name="actual_date">2026-02-02</field>
+            <field name="planned_date">2026-02-02</field>
+            <field name="actual_date">2026-02-04</field>
             <field name="doctor_id" ref="demo_hr_hospital_doctor_cooper"/>
             <field name="patient_id" ref="demo_hr_hospital_patient_ross"/>
             <field name="visit_type">return</field>
@@ -147,7 +147,7 @@
 
         <record id="demo_hr_hospital_visit_racoon_wonderland" model="hr.hospital.visit">
             <field name="visit_status">planned</field>
-            <field name="planned_date">2026-02-21</field>
+            <field name="planned_date">2026-02-26</field>
             <field name="doctor_id" ref="demo_hr_hospital_intern_racoon"/>
             <field name="patient_id" ref="demo_hr_hospital_patient_wonderland"/>
             <field name="visit_type">return</field>
@@ -167,7 +167,7 @@
 
         <record id="demo_hr_hospital_visit_king_petrenko" model="hr.hospital.visit">
             <field name="visit_status">planned</field>
-            <field name="planned_date">2026-03-15</field>
+            <field name="planned_date">2026-01-15</field>
             <field name="actual_date">2026-02-11</field>
             <field name="doctor_id" ref="demo_hr_hospital_doctor_king"/>
             <field name="patient_id" ref="demo_hr_hospital_patient_patrenko"/>
@@ -211,7 +211,7 @@
 
         <record id="demo_hr_hospital_visit_brooks_smith" model="hr.hospital.visit">
             <field name="visit_status">cancelled</field>
-            <field name="planned_date">2026-03-11</field>
+            <field name="planned_date">2026-02-11</field>
             <field name="doctor_id" ref="demo_hr_hospital_doctor_brooks"/>
             <field name="patient_id" ref="demo_hr_hospital_patient_smith"/>
             <field name="visit_type">emergent</field>
@@ -221,7 +221,7 @@
 
         <record id="demo_hr_hospital_visit_tifanny_kivalenko" model="hr.hospital.visit">
             <field name="visit_status">cancelled</field>
-            <field name="planned_date">2026-02-21</field>
+            <field name="planned_date">2026-02-23</field>
             <field name="doctor_id" ref="demo_hr_hospital_doctor_tifanny"/>
             <field name="patient_id" ref="demo_hr_hospital_patient_kovalenko"/>
             <field name="visit_type">preventive</field>
@@ -241,7 +241,7 @@
 
         <record id="demo_hr_hospital_visit_swanson_muller_initial" model="hr.hospital.visit">
             <field name="visit_status">missed</field>
-            <field name="planned_date">2026-01-10</field>
+            <field name="planned_date">2026-01-14</field>
             <field name="doctor_id" ref="demo_hr_hospital_doctor_swanson"/>
             <field name="patient_id" ref="demo_hr_hospital_patient_muller"/>
             <field name="visit_type">initial</field>
@@ -261,7 +261,7 @@
 
         <record id="demo_hr_hospital_visit_tifanny_uchiha" model="hr.hospital.visit">
             <field name="visit_status">missed</field>
-            <field name="planned_date">2026-02-07</field>
+            <field name="planned_date">2026-02-03</field>
             <field name="doctor_id" ref="demo_hr_hospital_doctor_tifanny"/>
             <field name="patient_id" ref="demo_hr_hospital_patient_uchiha"/>
             <field name="visit_type">initial</field>
@@ -308,7 +308,7 @@
 
         <record id="demo_hr_hospital_visit_mayer_uchia" model="hr.hospital.visit">
             <field name="visit_status">planned</field>
-            <field name="planned_date">2026-02-15</field>
+            <field name="planned_date">2026-02-13</field>
             <field name="doctor_id" ref="demo_hr_hospital_doctor_mayer"/>
             <field name="patient_id" ref="demo_hr_hospital_patient_uchiha"/>
             <field name="visit_type">preventive</field>

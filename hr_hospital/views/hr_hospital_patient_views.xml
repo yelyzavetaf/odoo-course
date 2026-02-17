@@ -5,6 +5,14 @@
             <field name="model">hr.hospital.patient</field>
             <field name="arch" type="xml">
                 <list string="Patients">
+                    <header>
+                        <button name="%(action_mass_reassign_doctor)d"
+                        string="Reassign doctor"
+                        type="action" class="oe_highlight"/>
+                        <button name="%(action_patient_card_export_wizard)d"
+                        string="Export card" display="always"
+                        type="action" class="oe_highlight"/>
+                    </header>
                     <field name="full_name"/>
                     <field name="sex"/>
                     <field name="age"/>

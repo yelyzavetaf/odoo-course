@@ -10,4 +10,5 @@ class HrHospitalContactPerson(models.Model):
         comodel_name='hr.hospital.patient',
         inverse_name='contact_id',
         string='Contact Person for Patients',
+        domain="[('allergies', '!=', False), ('allergies', '!=', '')]",
     )

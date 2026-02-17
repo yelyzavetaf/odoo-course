@@ -1,0 +1,46 @@
+<odoo>
+    <record id="view_doctor_schedule_wizard_form" model="ir.ui.view">
+        <field name="name">hr.hospital.doctor.schedule.wizard.form</field>
+        <field name="model">hr.hospital.doctor.schedule.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Fill in doctor schedule">
+                <group>
+                    <group string="Period parameters">
+                        <field name="doctor_id" options="{'no_create': True}"/>
+                        <field name="start_date"/>
+                        <field name="weeks_count"/>
+                        <field name="schedule_type"/>
+                    </group>
+                    <group string="Working time">
+                        <field name="start_time" widget="float_time"/>
+                        <field name="end_time" widget="float_time"/>
+                        <field name="has_break"/>
+                        <field name="break_start" widget="float_time" invisible="not has_break"/>
+                        <field name="break_end" widget="float_time" invisible="not has_break"/>
+                    </group>
+                </group>
+                <separator string="Select working days"/>
+                <div class="o_row">
+                    <field name="mo"/><label for="mo" string="Пн"/>
+                    <field name="tu" class="ms-3"/><label for="tu" string="Вт"/>
+                    <field name="we" class="ms-3"/><label for="we" string="Ср"/>
+                    <field name="th" class="ms-3"/><label for="th" string="Чт"/>
+                    <field name="fr" class="ms-3"/><label for="fr" string="Пт"/>
+                    <field name="sa" class="ms-3"/><label for="sa" string="Сб"/>
+                    <field name="su" class="ms-3"/><label for="su" string="Нд"/>
+                </div>
+                <footer>
+                    <button name="action_generate_schedule" string="Generate" type="object" class="btn-primary"/>
+                <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_doctor_schedule_wizard" model="ir.actions.act_window">
+        <field name="name">Generate Schedule</field>
+        <field name="res_model">hr.hospital.doctor.schedule.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

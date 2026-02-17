@@ -2,7 +2,7 @@ from datetime import datetime, time
 
 from odoo import api, models, fields
 
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 
 
 class HrHospitalVisit(models.Model):
@@ -33,6 +33,7 @@ class HrHospitalVisit(models.Model):
         comodel_name='hr.hospital.doctor',
         string='Doctor',
         required=True,
+        domain=[('licence_number', '!=', False)],
     )
 
     patient_id = fields.Many2one(
@@ -52,7 +53,7 @@ class HrHospitalVisit(models.Model):
 
     currency_id = fields.Many2one(
         comodel_name='res.currency',
-        default='base.USD',
+        default=lambda self: self.env.company.currency_id,
         required=True,
     )
 
@@ -72,7 +73,34 @@ class HrHospitalVisit(models.Model):
         store=True
     )
 
-    recommendations = fields.Html()
+    recommendations = fields.Html(
+        sanitize="True",
+    )
+
+    @api.constrains('planned_date', 'doctor_id')
+    def _check_visit_date_validity(self):
+        for record in self:
+            if not record.planned_date or not record.doctor_id:
+                continue
+
+            weekday = record.planned_date.weekday()
+            if weekday >= 5:
+                raise ValidationError(
+                    "Scheduling a visit for a weekend is not allowed."
+                )
+
+            visit_date = record.planned_date.date()
+            holiday = self.env['hr.hospital.doctor.schedule'].search([
+                ('doctor_schedule_id', '=', record.doctor_id.id),
+                ('date', '=', visit_date),
+                ('type', '=', 'vacation'),
+                ('active', '=', True)
+            ], limit=1)
+
+            if holiday:
+                raise ValidationError((
+                    "Doctor %s on (%s) is on vacatioon!"
+                ) % (record.doctor_id.full_name, visit_date))
 
     @api.depends('diagnosis_ids')
     def _compute_diagnosis_count(self):

@@ -1,5 +1,4 @@
 <odoo>
-
         <record id="hr_hospital_visit_list" model="ir.ui.view">
             <field name="name">hr.hospital.visit.list ()</field>
             <field name="model">hr.hospital.visit</field>
@@ -25,6 +24,13 @@
             <field name="model">hr.hospital.visit</field>
             <field name="arch" type="xml">
                 <form>
+                    <xpath expr="//header" position="inside">
+                        <button name="%(action_reschedule_visit_wizard)d"
+                            string="Reschedule"
+                            type="action"
+                            class="btn-secondary"
+                            invisible="active == False"/>
+                    </xpath>
                     <sheet>
                         <group>
                             <group>

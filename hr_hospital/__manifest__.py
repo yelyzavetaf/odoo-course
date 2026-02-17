@@ -11,6 +11,11 @@
     'data': [
         "security/ir.model.access.csv",
         "data/hr_hospital_disease_data.xml",
+        "wizard/hr_hospital_mass_reassign_doctor_wizard_view.xml",
+        "wizard/hr_hospital_disease_report_wizard_view.xml",
+        "wizard/hr_hospital_reschedule_visit_wizard_view.xml",
+        "wizard/hr_hospital_doctor_schedule_wizard_view.xml",
+        "wizard/hr_hospital_patient_card_export_wizard_view.xml",
         "views/hr_hospital_menus.xml",
         "views/hr_hospital_disease_views.xml",
         "views/hr_hospital_contact_person_views.xml",

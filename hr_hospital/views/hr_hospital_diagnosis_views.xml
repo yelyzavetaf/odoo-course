@@ -5,6 +5,12 @@
             <field name="model">hr.hospital.diagnosis</field>
             <field name="arch" type="xml">
                 <list string="Diagnoses">
+                    <header>
+                        <button name="%(action_disease_report_wizard)d"
+                        string="Generate report"
+                        display="always"
+                        type="action" class="oe_highlight"/>
+                    </header>
                     <field name="visit_id"/>
                     <field name="disease_id"/>
                     <field name="description"/>

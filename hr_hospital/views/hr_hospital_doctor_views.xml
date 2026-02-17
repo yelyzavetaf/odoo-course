@@ -5,6 +5,12 @@
             <field name="model">hr.hospital.doctor</field>
             <field name="arch" type="xml">
                 <list string="Doctors">
+                    <header>
+                        <button name="%(action_doctor_schedule_wizard)d"
+                        string="Add schedule"
+                        display="always"
+                        type="action" class="oe_highlight"/>
+                    </header>
                     <field name="full_name"/>
                     <field name="speciality_id"/>
                     <field name="licence_number"/>

@@ -12,6 +12,7 @@ class HrHospitalDoctorSchedule(models.Model):
     doctor_schedule_id = fields.Many2one(
         comodel_name='hr.hospital.doctor',
         required=True,
+        domain=[('specialty_id', '!=', False), ('specialty_id', '!=', '')]
     )
 
     day_of_week = fields.Selection([

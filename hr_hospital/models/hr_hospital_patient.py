@@ -92,8 +92,8 @@ class HrHospitalPatient(models.Model):
             for patient in self:
                 if patient.doctor_id.id != vals.get("doctor_id"):
                     self.env['hr.hospital.patient.doctor.history'].create({
-                        'patient_id': patient.id,
-                        'doctor_id': vals.get("doctor_id"),
+                        'patient_history_id': patient.id,
+                        'doctor_history_id': vals.get("doctor_id"),
                         'assigned_date': fields.Date.context_today(self),
                     })
         return super(HrHospitalPatient, self).write(vals)
