@@ -10,6 +10,7 @@ class HrHospitalDoctor(models.Model):
     _name = 'hr.hospital.doctor'
     _description = 'Doctor'
     _inherit = 'hr.hospital.abstract.person'
+    _rec_names_search = 'full_name'
 
     user_id = fields.Many2one(
         comodel_name='res.users',
@@ -29,6 +30,12 @@ class HrHospitalDoctor(models.Model):
         comodel_name='hr.hospital.doctor',
         string='Mentor',
         domain=[('is_intern', '=', False)],
+    )
+
+    intern_ids = fields.One2many(
+        comodel_name='hr.hospital.doctor',
+        inverse_name='mentor_id',
+        string='Interns'
     )
 
     patient_ids = fields.One2many(
@@ -124,3 +131,17 @@ class HrHospitalDoctor(models.Model):
                             "Can not archive doctor with active visits."
                         )
         return super(HrHospitalDoctor, self).action_archive()
+
+    def action_create_visit_from_kanban(self):
+        self.ensure_one()
+        return {
+            'name': 'New Visit',
+            'type': 'ir.actions.act_window',
+            'res_model': 'hr.hospital.visit',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {
+                'default_doctor_id': self.id,
+                'default_planned_date': fields.Datetime.now(),
+            },
+        }

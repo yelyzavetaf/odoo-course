@@ -50,7 +50,51 @@ class HrHospitalPatient(models.Model):
     doctor_history_ids = fields.One2many(
         comodel_name='hr.hospital.patient.doctor.history',
         inverse_name='patient_history_id',
+        context={'active_test': False},
     )
+
+    diagnosis_ids = fields.One2many(
+        comodel_name='hr.hospital.diagnosis',
+        inverse_name='patient_id',
+        string='Diagnoses history',
+        readonly=True
+    )
+
+    visit_count = fields.Integer(
+        compute='_compute_visit_count',
+        string='Number of visits',
+    )
+
+    def _compute_visit_count(self):
+        for patient in self:
+            patient.visit_count = self.env['hr.hospital.visit'].search_count([
+                ('patient_id', '=', patient.id)
+            ])
+
+    def action_view_patient_visits(self):
+        self.ensure_one()
+        return {
+            'name': 'Patient visits',
+            'type': 'ir.actions.act_window',
+            'res_model': 'hr.hospital.visit',
+            'view_mode': 'list,form,calendar',
+            'domain': [('patient_id', '=', self.id)],
+            'context': {'default_patient_id': self.id},
+        }
+
+    def action_create_new_visit(self):
+        self.ensure_one()
+        return {
+            'name': 'New visit',
+            'type': 'ir.actions.act_window',
+            'res_model': 'hr.hospital.visit',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {
+                'default_patient_id': self.id,
+                'default_planned_date': fields.Datetime.now(),
+            },
+        }
 
     @api.constrains('birth_date')
     def _check_birth_date(self):

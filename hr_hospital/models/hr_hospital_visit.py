@@ -99,8 +99,13 @@ class HrHospitalVisit(models.Model):
 
             if holiday:
                 raise ValidationError((
-                    "Doctor %s on (%s) is on vacatioon!"
+                    "Doctor %s on (%s) is on vacation!"
                 ) % (record.doctor_id.full_name, visit_date))
+
+    @api.depends('patient_id', 'doctor_id')
+    def _compute_display_name(self):
+        for visit in self:
+            visit.display_name = f"{visit.patient_id.full_name} ({visit.doctor_id.full_name} ({visit.doctor_id.speciality_id.name}))"
 
     @api.depends('diagnosis_ids')
     def _compute_diagnosis_count(self):

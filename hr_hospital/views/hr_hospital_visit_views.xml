@@ -5,16 +5,15 @@
             <field name="arch" type="xml">
                 <list string="Visits">
                     <field name="planned_date"/>
-                    <field name="actual_date" readonly="visit_status != 'done'"/>
-                    <field name="visit_status"/>
+                    <field name="actual_date" readonly="visit_status != 'done'" optional="hide"/>
+                    <field name="visit_status" optional="show"/>
+                    <field name="visit_type" optional="hide"/>
                     <field name="doctor_id"/>
                     <field name="patient_id"/>
-                    <field name="visit_type"/>
-                    <field name="currency_id"/>
+                    <field name="currency_id" column_invisible="True"/>
                     <field name="visit_cost"/>
-                    <field name="diagnosis_count"/>
-                    <field name="diagnosis_ids"/>
-                    <field name="recommendations"/>
+                    <field name="diagnosis_count" optional="hide"/>
+                    <field name="recommendations" optional="hide"/>
                 </list>
             </field>
         </record>
@@ -24,25 +23,25 @@
             <field name="model">hr.hospital.visit</field>
             <field name="arch" type="xml">
                 <form>
-                    <xpath expr="//header" position="inside">
+                    <header>
                         <button name="%(action_reschedule_visit_wizard)d"
                             string="Reschedule"
                             type="action"
-                            class="btn-secondary"
+                            class="oe_highlight"
                             invisible="active == False"/>
-                    </xpath>
+                        <field name="visit_status" widget="statusbar" options="{'clickable': '1'}"/>
+                    </header>
                     <sheet>
                         <group>
                             <group>
                                 <field name="planned_date"/>
-                                <field name="visit_status"/>
                                 <field name="doctor_id"/>
                                 <field name="patient_id"/>
                                 <field name="visit_type"/>
+                                <field name="currency_id" invisible="True"/>
+                                <field name="visit_cost"/>
                             </group>
                             <group>
-                                <field name="currency_id"/>
-                                <field name="visit_cost"/>
                                 <field name="diagnosis_ids"/>
                             </group>
                         </group>
@@ -56,11 +55,54 @@
             </field>
         </record>
 
+
+        <record id="hr_hospital_visit_calendar" model="ir.ui.view">
+            <field name="name">hr.hospital.visit.calendar ()</field>
+            <field name="model">hr.hospital.visit</field>
+            <field name="priority" eval="10"/>
+            <field name="arch" type="xml">
+                <calendar string="Visits schedule" create="1" quick_create="False" mode="month" scales="day,month,year" color="patient_id" date_start="planned_date" event_open_popup="True">
+                    <field name="patient_id"/>
+                    <field name="doctor_id" filters="1"/>
+                    <field name="visit_status"/>
+                </calendar>
+            </field>
+        </record>
+
+        <record id="hr_hospital_visit_search" model="ir.ui.view">
+            <field name="name">hr.hospital.visit.search (hr_hospital_visit)</field>
+            <field name="model">hr.hospital.visit</field>
+            <field name="arch" type="xml">
+                <search string="Search visit">
+                    <field name="visit_status"/>
+                    <filter string="Planned Visits" name="visit_filter_planned" domain="[('visit_status', '=', 'planned')]"/>
+                    <filter string="Completed Visits" name="visit_filter_completed" domain="[('visit_status', '=', 'done')]"/>
+                    <separator/>
+                    <filter string="This month" name="filter_this_month" date="planned_date" default_period="month" domain="[]" context="{'group_by':'planned_date'}"/>
+                    <group>
+                        <filter string="Visit Status" name="group_by_visit_status" domain="[]" context="{'group_by':'visit_status'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="hr_hospital_visit_pivot" model="ir.ui.view">
+            <field name="name">hr.hospital.visit.pivot</field>
+            <field name="model">hr.hospital.visit</field>
+            <field name="arch" type="xml">
+                <pivot string="Visits analytics" sample="1">
+                    <field name="doctor_id" type="row"/>
+                    <field name="visit_status" type="col"/>
+                </pivot>
+            </field>
+        </record>
+
+
         <record id="action_hr_hospital_visit_window" model="ir.actions.act_window">
             <field name="name">Visits</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">hr.hospital.visit</field>
-            <field name="view_mode">list,form</field>
+            <field name="view_mode">list,form,calendar,pivot</field>
         </record>
 
         <menuitem id="hr_hospital_menu_visit"

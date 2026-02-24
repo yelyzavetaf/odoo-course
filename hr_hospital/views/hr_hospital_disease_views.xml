@@ -44,6 +44,30 @@
             </field>
         </record>
 
+        <record id="hr_hospital_disease_search" model="ir.ui.view">
+            <field name="name">hr.hospital.disease.search</field>
+            <field name="model">hr.hospital.disease</field>
+            <field name="arch" type="xml">
+                <search string="Search disease">
+                    <field name="name"/>
+                    <field name="icd_10"/>
+
+                    <searchpanel>
+                        <field name="parent_id"
+                               string="Disease types"
+                               enable_counters="1"
+                               expand="1"
+                               icon="fa-circle"/>
+
+                        <field name="danger_level"
+                               string="Severity"
+                               select="multi"
+                               icon="fa-plus"/>
+                    </searchpanel>
+                </search>
+            </field>
+        </record>
+
         <record id="action_hr_hospital_disease_window" model="ir.actions.act_window">
             <field name="name">Diseases</field>
             <field name="type">ir.actions.act_window</field>

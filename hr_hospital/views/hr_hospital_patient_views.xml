@@ -16,11 +16,11 @@
                     <field name="full_name"/>
                     <field name="sex"/>
                     <field name="age"/>
-                    <field name="passport_data"/>
-                    <field name="blood_type"/>
+                    <field name="passport_data" optional="hide"/>
+                    <field name="blood_type" optional="hide"/>
                     <field name="doctor_id"/>
-                    <field name="insurance_company_id"/>
-                    <field name="insurance_number"/>
+                    <field name="insurance_company_id" optional="hide"/>
+                    <field name="insurance_number" optional="hide"/>
                 </list>
             </field>
         </record>
@@ -31,6 +31,19 @@
             <field name="arch" type="xml">
                 <form>
                     <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_create_new_visit"
+                                    type="object"
+                                    class="oe_stat_button"
+                                    icon="fa-plus-circle"
+                                    string="New visit"/>
+                            <button name="action_view_patient_visits"
+                                    type="object"
+                                    class="oe_stat_button"
+                                    icon="fa-calendar">
+                                <field name="visit_count" widget="statinfo" string="Visits"/>
+                            </button>
+                        </div>
                         <group>
                             <group>
                                 <field name="last_name"/>
@@ -52,8 +65,45 @@
                                 <field name="language_id"/>
                             </group>
                         </group>
+                        <notebook>
+                            <page name="diagnosis_history" string="Diagnoses history">
+                                <field name="diagnosis_ids">
+                                    <list create="0" edit="0" delete="0">
+                                        <field name="disease_id"/>
+                                        <field name="description"/>
+                                        <field name="approved"/>
+                                        <field name="approved_by" optional="hide"/>
+                                        <field name="approved_date" optional="hide"/>
+                                        <field name="severity"/>
+                                    </list>
+                                </field>
+                            </page>
+
+                            <page name="doctors_history" string="Doctors history">
+                                <field name="doctor_history_ids" context="{'active_test': False}">
+                                    <list create="0" edit="0" delete="0">
+                                        <field name="doctor_history_id"/>
+                                        <field name="active" column_invisible="True"/>
+                                        <field name="assigned_date"/>
+                                        <field name="reassigned_date"/>
+                                        <field name="reassigned_reason" optional="show"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
                     </sheet>
                 </form>
+            </field>
+        </record>
+
+        <record id="hr_hospital_patient_search" model="ir.ui.view">
+            <field name="name">hr.hospital.patient.search (hr_hospital_patient)</field>
+            <field name="model">hr.hospital.patient</field>
+            <field name="arch" type="xml">
+                <search string="Search patient">
+                    <field name="full_name" string="Name" filter_domain="[('full_name', 'ilike', self)]"/>
+                    <field name="phone_number" filter_domain="[('phone_number', 'ilike', self)]"/>
+                </search>
             </field>
         </record>
 
