@@ -1,4 +1,4 @@
-from odoo import models, fields, api, _
+from odoo import models, fields, api
 from odoo.exceptions import UserError
 
 
@@ -17,7 +17,7 @@ class HrHospitalMassReassignDoctorWizard(models.TransientModel):
 
     @api.model
     def default_get(self, fields_list):
-        default_vals = super(HrHospitalMassReassignDoctorWizard, self).default_get(fields_list)
+        default_vals = super().default_get(fields_list)
         default_vals['patient_ids'] = [(
             6, 0, self.env.context.get('active_ids', [])
         )]
@@ -33,7 +33,7 @@ class HrHospitalMassReassignDoctorWizard(models.TransientModel):
 
     def action_reassign(self):
         if not self.patient_ids:
-            raise UserError(_("Please select patients."))
+            raise UserError("Please select patients.")
 
         self.patient_ids.write({
             'doctor_id': self.new_doctor_id.id

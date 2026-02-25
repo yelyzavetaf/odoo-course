@@ -41,7 +41,6 @@ class HrHospitalPatient(models.Model):
 
     insurance_company_id = fields.Many2one(
         comodel_name='res.partner',
-        string='Insurance Company',
         domain=[('is_company', '=', True)],
     )
 
@@ -104,7 +103,7 @@ class HrHospitalPatient(models.Model):
             person.age = diff.years
             if person.age <= 0:
                 raise ValidationError(
-                    "Patient age can not be %s years." % person.age
+                    f"Patient age can not be {person.age} years."
                 )
 
     @api.depends('full_name')
@@ -126,8 +125,8 @@ class HrHospitalPatient(models.Model):
                 return {
                     'warning': {
                         'title': "Patient country was changed",
-                        'message': "Suggested language was updated "
-                                   "to %s" % lang.display_name,
+                        'message': f"Suggested language was updated "
+                                   f"to {lang.display_name}"
                     }
                 }
 
@@ -140,4 +139,4 @@ class HrHospitalPatient(models.Model):
                         'doctor_history_id': vals.get("doctor_id"),
                         'assigned_date': fields.Date.context_today(self),
                     })
-        return super(HrHospitalPatient, self).write(vals)
+        return super().write(vals)

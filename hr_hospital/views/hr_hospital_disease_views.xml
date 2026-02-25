@@ -24,21 +24,32 @@
             <field name="arch" type="xml">
                 <form>
                     <sheet>
+                        <div class="oe_title">
+                            <label for="name" string="Name"/>
+                                <h1>
+                                    <field name="name"/>
+                                </h1>
+                        </div>
                         <group>
                             <group>
-                                <field name="name"/>
                                 <field name="icd_10"/>
                                 <field name="description"/>
                                 <field name="symptoms"/>
-                                <field name="region_ids"/>
                             </group>
                             <group>
                                 <field name="danger_level"/>
                                 <field name="is_contagious"/>
                                 <field name="parent_id"/>
-                                <field name="child_ids"/>
                             </group>
                         </group>
+                        <notebook>
+                            <page string="Regions distribution" name="regions">
+                                <field name="region_ids"/>
+                            </page>
+                            <page string="Child diseases" name="child_diseases">
+                                <field name="child_ids"/>
+                            </page>
+                        </notebook>
                     </sheet>
                 </form>
             </field>

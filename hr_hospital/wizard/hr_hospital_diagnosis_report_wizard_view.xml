@@ -1,0 +1,33 @@
+<odoo>
+    <record id="hr_hospital_diagnosis_report_wizard_view_form" model="ir.ui.view">
+        <field name="name">hr.hospital.diagnosis.report.wizard.form</field>
+        <field name="model">hr.hospital.diagnosis.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Parameters">
+                <group>
+                    <group string="Period">
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                    </group>
+                    <group string="Filters">
+                        <field name="doctor_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                        <field name="disease_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_open_report" string="Create" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_diagnosis_report_wizard" model="ir.actions.act_window">
+        <field name="name">Diagnoses report</field>
+        <field name="res_model">hr.hospital.diagnosis.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="model_hr_hospital_doctor"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

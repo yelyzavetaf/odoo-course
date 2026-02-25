@@ -20,7 +20,6 @@ class HrHospitalDoctor(models.Model):
 
     speciality_id = fields.Many2one(
         comodel_name='hr.hospital.doctor.speciality',
-        string='Speciality',
         required=True,
     )
 
@@ -28,7 +27,6 @@ class HrHospitalDoctor(models.Model):
 
     mentor_id = fields.Many2one(
         comodel_name='hr.hospital.doctor',
-        string='Mentor',
         domain=[('is_intern', '=', False)],
     )
 
@@ -93,7 +91,7 @@ class HrHospitalDoctor(models.Model):
     def _compute_display_name(self):
         for doctor in self:
             doctor.display_name = (
-                '%s (%s)' % (doctor.full_name, doctor.speciality_id.name)
+                f"{doctor.full_name} ({doctor.speciality_id.name})"
             )
 
     @api.depends('experience')
@@ -130,7 +128,7 @@ class HrHospitalDoctor(models.Model):
                         raise UserError(
                             "Can not archive doctor with active visits."
                         )
-        return super(HrHospitalDoctor, self).action_archive()
+        return super().action_archive()
 
     def action_create_visit_from_kanban(self):
         self.ensure_one()

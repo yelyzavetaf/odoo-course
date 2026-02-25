@@ -63,9 +63,8 @@ class HrHospitalAbstractPerson(models.AbstractModel):
             if person.email:
                 email_regex = r'^[\w\.-]+@[\w\.-]+\.\w+$'
                 if not re.match(email_regex, person.email):
-                    raise ValidationError(
-                        ("Wrong email format: %s") % person.email
-                    )
+                    raise ValidationError(f"Wrong email format: "
+                                          f"{person.email}")
 
     @api.depends('birth_date')
     def _compute_age(self):

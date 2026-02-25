@@ -44,7 +44,7 @@ class HrHospitalDiagnosis(models.Model):
 
     severity = fields.Selection(
         [
-            ('low', 'Low'),
+            ('low', 'Light'),
             ('medium', 'Medium'),
             ('high', 'High'),
             ('critical', 'Critical'),
@@ -56,6 +56,6 @@ class HrHospitalDiagnosis(models.Model):
     def _get_visit_domain(self):
         date_limit = fields.Date.today() - timedelta(days=30)
         return [
-            ('state', '=', 'done'),
+            ('visit_status', '=', 'done'),
             ('actual_date', '>=', date_limit)
         ]

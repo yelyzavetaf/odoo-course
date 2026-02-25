@@ -1,5 +1,5 @@
-from odoo import models, fields
 from datetime import timedelta
+from odoo import models, fields
 
 
 class HrHospitalDoctorScheduleWizard(models.TransientModel):

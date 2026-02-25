@@ -44,25 +44,32 @@
                                 <field name="visit_count" widget="statinfo" string="Visits"/>
                             </button>
                         </div>
+                        <div class="oe_title">
+                            <label for="first_name" string="Full name"/>
+                                <h1 class="d-flex gap-2">
+                                    <field name="last_name" placeholder="Last name"/>
+                                    <field name="first_name" placeholder="First name"/>
+                                    <field name="middle_name" placeholder="Middle name"/>
+                                </h1>
+                        </div>
                         <group>
-                            <group>
-                                <field name="last_name"/>
-                                <field name="first_name"/>
-                                <field name="middle_name"/>
+                            <group string="General information">
                                 <field name="sex"/>
                                 <field name="birth_date"/>
                                 <field name="age"/>
-                                <field name="blood_type"/>
-                            </group>
-                            <group>
                                 <field name="passport_data"/>
-                                <field name="phone_number"/>
+                                <field name="country_id"/>
+                                <field name="blood_type"/>
                                 <field name="doctor_id"/>
+                            </group>
+                            <group string="Contact information">
+                                <field name="phone_number"/>
+                                <field name="email"/>
                                 <field name="contact_id"/>
+                                <field name="language_id"/>
+                                <separator string="Insurance"/>
                                 <field name="insurance_company_id"/>
                                 <field name="insurance_number"/>
-                                <field name="country_id"/>
-                                <field name="language_id"/>
                             </group>
                         </group>
                         <notebook>

@@ -31,14 +31,12 @@ class HrHospitalVisit(models.Model):
 
     doctor_id = fields.Many2one(
         comodel_name='hr.hospital.doctor',
-        string='Doctor',
         required=True,
         domain=[('licence_number', '!=', False)],
     )
 
     patient_id = fields.Many2one(
         comodel_name='hr.hospital.patient',
-        string='Patient',
         required=True,
     )
 
@@ -64,7 +62,6 @@ class HrHospitalVisit(models.Model):
     diagnosis_ids = fields.One2many(
         comodel_name='hr.hospital.diagnosis',
         inverse_name='visit_id',
-        string='Diagnosis',
     )
 
     diagnosis_count = fields.Integer(
@@ -98,14 +95,17 @@ class HrHospitalVisit(models.Model):
             ], limit=1)
 
             if holiday:
-                raise ValidationError((
-                    "Doctor %s on (%s) is on vacation!"
-                ) % (record.doctor_id.full_name, visit_date))
+                raise ValidationError(
+                    f"Doctor {record.doctor_id.full_name} on "
+                    f"{visit_date} is on vacation!"
+                )
 
     @api.depends('patient_id', 'doctor_id')
     def _compute_display_name(self):
         for visit in self:
-            visit.display_name = f"{visit.patient_id.full_name} ({visit.doctor_id.full_name} ({visit.doctor_id.speciality_id.name}))"
+            visit.display_name = (f"{visit.patient_id.full_name} "
+                                  f"({visit.doctor_id.full_name} "
+                                  f"({visit.doctor_id.speciality_id.name}))")
 
     @api.depends('diagnosis_ids')
     def _compute_diagnosis_count(self):
@@ -118,8 +118,8 @@ class HrHospitalVisit(models.Model):
             return {
                 'warning': {
                     'title': "Warning",
-                    'message': "The chosen patient has allergies (%s)."
-                               % self.patient_id.allergies,
+                    'message': f"The chosen patient has allergies "
+                               f"{self.patient_id.allergies}."
                 }
             }
 
@@ -146,10 +146,11 @@ class HrHospitalVisit(models.Model):
 
                 if duplicate:
                     doctor = self.env['hr.hospital.doctor'].browse(doctor_id)
-                    raise UserError((
-                        "Patient has already planned a visit to %s for (%s)."
-                    ) % (doctor.display_name, planned_dt.date()))
-        return super(HrHospitalVisit, self).create(vals_list)
+                    raise UserError(
+                        f"Patient has already planned a visit to "
+                        f"{doctor.display_name} for {planned_dt.date()}."
+                    )
+        return super().create(vals_list)
 
     def write(self, vals):
         essential_fields = [
@@ -159,16 +160,17 @@ class HrHospitalVisit(models.Model):
             if visit.actual_date:
                 if visit.actual_date.date() < fields.Date.context_today(self):
                     if any(field in vals for field in essential_fields):
-                        raise UserError((
-                            "Updating past visit (ID: %s) is not allowed."
-                        ) % visit.id)
-        return super(HrHospitalVisit, self).write(vals)
+                        raise UserError(
+                            f"Updating past visit (ID: {visit.id}) "
+                            f"is not allowed."
+                        )
+        return super().write(vals)
 
     def unlink(self):
         for visit in self:
             if visit.diagnosis_ids:
-                raise UserError((
-                    "Removing visit (ID: %s) is not allowed "
+                raise UserError(
+                    f"Removing visit (ID: {visit.id}) is not allowed "
                     "because of diagnosis added."
-                ) % visit.id)
-        return super(HrHospitalVisit, self).unlink()
+                )
+        return super().unlink()

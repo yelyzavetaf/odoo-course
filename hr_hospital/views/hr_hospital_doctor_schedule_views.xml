@@ -1,0 +1,19 @@
+<odoo>
+
+        <record id="hr_hospital_doctor_schedule_list" model="ir.ui.view">
+            <field name="name">hr.hospital.doctor.schedule.list ()</field>
+            <field name="model">hr.hospital.doctor.schedule</field>
+            <field name="arch" type="xml">
+                <list string="Schedule">
+                    <field name="doctor_schedule_id" optional="hide"/>
+                    <field name="day_of_week"/>
+                    <field name="date"/>
+                    <field name="start_time"/>
+                    <field name="end_time"/>
+                    <field name="type"/>
+                    <field name="notes" optional="hide"/>
+                </list>
+            </field>
+        </record>
+
+</odoo>

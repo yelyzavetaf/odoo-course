@@ -15,10 +15,10 @@
                     <field name="disease_id"/>
                     <field name="description"/>
                     <field name="approved"/>
-                    <field name="approved_by"/>
-                    <field name="approved_date"/>
+                    <field name="approved_by" optional="hide"/>
+                    <field name="approved_date" optional="hide"/>
                     <field name="severity"/>
-                    <field name="prescribed_treatment"/>
+                    <field name="prescribed_treatment" optional="hide"/>
                 </list>
             </field>
         </record>
@@ -29,17 +29,22 @@
             <field name="arch" type="xml">
                 <form>
                     <sheet>
+                        <div class="oe_title">
+                            <label for="visit_id" string="Visit"/>
+                                <h1>
+                                    <field name="visit_id"/>
+                                </h1>
+                        </div>
                         <group>
-                            <group>
-                                <field name="visit_id"/>
+                            <group string="Details">
                                 <field name="disease_id"/>
                                 <field name="description"/>
+                                <field name="severity"/>
                             </group>
-                            <group>
+                            <group string="Approval">
                                 <field name="approved"/>
                                 <field name="approved_by"/>
                                 <field name="approved_date"/>
-                                <field name="severity"/>
                             </group>
                         </group>
                         <notebook>
@@ -58,6 +63,7 @@
             <field name="arch" type="xml">
                 <search>
                     <filter string="Approved only" name="filter_approved_diagnoses" domain="[('approved_date', '!=', False)]"/>
+                    <filter string="Diseases" name="group_by_disease" context="{'group_by': 'disease_id'}"/>
                 </search>
             </field>
         </record>
@@ -82,7 +88,7 @@
             <field name="name">hr.hospital.diagnosis.graph</field>
             <field name="model">hr.hospital.diagnosis</field>
             <field name="arch" type="xml">
-                <graph string="Аналітика захворюваності" type="bar" sample="1" stacked="True">
+                <graph string="Disease analytics" type="bar" sample="1" stacked="True">
                     <field name="approved_date" interval="month"/>
                     <field name="disease_id"/>
                 </graph>

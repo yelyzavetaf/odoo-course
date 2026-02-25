@@ -41,4 +41,4 @@ class HrHospitalPatientDoctorHistory(models.Model):
                         'reassigned_reason': 'New doctor assignment'
                     })
 
-        return super(HrHospitalPatientDoctorHistory, self).create(vals_list)
+        return super().create(vals_list)

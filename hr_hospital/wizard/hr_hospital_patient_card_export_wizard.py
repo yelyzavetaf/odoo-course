@@ -7,7 +7,7 @@ from odoo import models, fields, api
 
 class HrHospitalPatientCardExportWizard(models.TransientModel):
     _name = 'hr.hospital.patient.card.export.wizard'
-    _description = 'Export meedical card'
+    _description = 'Export medical card'
 
     patient_id = fields.Many2one(
         comodel_name='hr.hospital.patient',

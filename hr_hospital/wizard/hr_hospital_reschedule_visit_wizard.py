@@ -1,4 +1,4 @@
-from odoo import models, fields, api, _
+from odoo import models, fields, api
 from odoo.exceptions import UserError
 
 
@@ -27,7 +27,7 @@ class HrHospitalRescheduleVisitWizard(models.TransientModel):
     def action_reschedule(self):
         self.ensure_one()
         if not self.visit_id:
-            raise UserError(_("Visit not found."))
+            raise UserError("Visit not found.")
 
         self.visit_id.write({
             'active': False,
@@ -42,7 +42,7 @@ class HrHospitalRescheduleVisitWizard(models.TransientModel):
         })
 
         return {
-            'name': _('New visit'),
+            'name': 'New visit',
             'type': 'ir.actions.act_window',
             'res_model': 'hr.hospital.visit',
             'res_id': new_visit.id,

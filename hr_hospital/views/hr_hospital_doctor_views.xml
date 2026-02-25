@@ -7,9 +7,15 @@
                 <list string="Doctors">
                     <header>
                         <button name="%(action_doctor_schedule_wizard)d"
-                        string="Add schedule"
-                        display="always"
-                        type="action" class="oe_highlight"/>
+                            string="Add schedule"
+                            display="always"
+                            type="action" class="oe_highlight"/>
+
+                        <button name="%(hr_hospital.action_diagnosis_report_wizard)d"
+                                string="Diagnoses report"
+                                type="action"
+                                display="always"
+                                class="btn-secondary"/>
                     </header>
                     <field name="full_name"/>
                     <field name="speciality_id"/>
@@ -27,28 +33,44 @@
             <field name="arch" type="xml">
                 <form>
                     <sheet>
+                        <div class="oe_title">
+                            <label for="first_name" string="Full name"/>
+                                <h1 class="d-flex gap-2">
+                                    <field name="last_name" placeholder="Last name"/>
+                                    <field name="first_name" placeholder="First name"/>
+                                    <field name="middle_name" placeholder="Middle name"/>
+                                </h1>
+                        </div>
                         <group>
-                            <group>
-                                <field name="last_name"/>
-                                <field name="first_name"/>
-                                <field name="middle_name"/>
+                            <group string="Personal information">
+                                <field name="email"/>
+                                <field name="phone_number"/>
+                                <field name="birth_date"/>
+                                <field name="sex"/>
+                                <field name="country_id"/>
+                                <field name="language_id"/>
+                            </group>
+                            <group string="Professional information">
                                 <field name="speciality_id"/>
-                                <field name="is_intern"/>
-                                <field name="mentor_id" invisible="not is_intern"/>
                                 <field name="licence_number"/>
                                 <field name="licence_issued_date"/>
                                 <field name="experience"/>
                                 <field name="education_country_id"/>
                                 <field name="rating" widget="float" options="{'digits': [3, 2]}"/>
-                            </group>
-                            <group>
-                                <field name="phone_number"/>
-                                <field name="birth_date"/>
-                                <field name="patient_ids">Patients</field>
+                                <separator string="Mentorship"/>
+                                    <field name="is_intern"/>
+                                    <field name="mentor_id" invisible="not is_intern"/>
+
                             </group>
                         </group>
-                        <notebook invisible="is_intern">
-                            <page string="Interns" name="interns">
+                        <notebook>
+                            <page string="Patients" name="patients">
+                                <field name="patient_ids"/>
+                            </page>
+                            <page string="Schedule" name="schedule">
+                                <field name="work_schedule_ids"/>
+                            </page>
+                            <page string="Interns" name="interns" invisible="is_intern">
                                 <field name="intern_ids" mode="kanban" readonly="1">
                                     <kanban>
                                         <field name="full_name"/>
