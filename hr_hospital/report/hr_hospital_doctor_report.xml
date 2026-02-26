@@ -1,0 +1,103 @@
+<odoo>
+    <record id="action_report_doctor_card" model="ir.actions.report">
+        <field name="name">Doctor visits report</field>
+        <field name="model">hr.hospital.doctor</field>
+        <field name="report_type">qweb-html</field>
+        <field name="report_name">hr_hospital.report_doctor_card_template</field>
+        <field name="report_file">hr_hospital.report_doctor_card_template</field>
+        <field name="print_report_name">'Report - %s' % (object.display_name)</field>
+        <field name="binding_model_id" ref="model_hr_hospital_doctor"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_doctor_card_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div class="text-center mb-4">
+                            <h2><span t-field="doc.full_name"/></h2>
+                            <h4 class="text-muted">Specialty: <span t-field="doc.speciality_id"/></h4>
+                        </div>
+
+                        <h5 class="mt-4">Visits history</h5>
+                        <table class="table table-sm o_main_table">
+                            <thead>
+                                <tr>
+                                    <th>Visit date</th>
+                                    <th>Patient</th>
+                                    <th>Diagnosis</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="doc.visits_ids.sorted(key=lambda v: v.planned_date, reverse=True)" t-as="visit">
+                                    <tr>
+                                        <td><span t-field="visit.planned_date"/></td>
+                                        <td><span t-field="visit.patient_id.full_name"/></td>
+                                        <td>
+                                            <div t-foreach="visit.diagnosis_ids" t-as="diag">
+                                                <i class="fa fa-stethoscope me-1"/>
+                                                <span t-field="diag.disease_id.name"/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+
+                        <h5 class="mt-4">Patients visits status</h5>
+                        <table class="table table-bordered table-sm">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Patient Full name</th>
+                                    <th>Sex</th>
+                                    <th>Birth date</th>
+                                    <th>Phone number</th>
+                                    <th>Visit status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="doc.visits_ids" t-as="v">
+                                    <tr>
+                                        <td><span t-field="v.patient_id.display_name"/></td>
+                                        <td><span t-field="v.patient_id.sex"/></td>
+                                        <td><span t-field="v.patient_id.birth_date"/></td>
+                                        <td><span t-field="v.patient_id.phone_number"/></td>
+
+                                        <td class="text-center" t-attf-style="background-color: #{
+                                            '#ffffcc' if v.visit_status == 'planned' else
+                                            '#ccffcc' if v.visit_status == 'done' else
+                                            '#ffcccc' if v.visit_status == 'cancelled' else '#ffffff'}">
+                                            <span t-field="v.visit_status"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="footer o_standard_footer">
+                        <div class="text-center" style="border-top: 1px solid black;">
+                            <div class="row mt-2">
+                                <div class="col-6 text-start">
+                                    <i class="fa fa-map-marker me-1"/>
+
+                                    <span t-field="res_company.city"/>
+                                </div>
+                                <div class="col-6 text-end">
+                                    <i class="fa fa-clock-o me-1"/>
+
+                                    <span t-out="context_timestamp(datetime.datetime.now()).strftime('%d.%m.%Y %H:%M')"/>
+                                </div>
+                            </div>
+
+                            <div class="text-muted small mt-1">
+                                Сторінка: <span class="page"/> / <span class="topage"/>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>
