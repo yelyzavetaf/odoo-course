@@ -64,6 +64,21 @@ class HrHospitalPatient(models.Model):
         string='Number of visits',
     )
 
+    last_visit_id = fields.Many2one(
+        comodel_name='hr.hospital.visit',
+        string='last_visit',
+        compute='_compute_last_visit_id',
+        store=True
+    )
+
+    def _compute_last_visit_id(self):
+        for patient in self:
+            last_visit = self.env['hr.hospital.visit'].search([
+                ('patient_id', '=', patient.id),
+            ], order='planned_date desc', limit=1)
+
+            patient.last_visit_id = last_visit
+
     def _compute_visit_count(self):
         for patient in self:
             patient.visit_count = self.env['hr.hospital.visit'].search_count([
