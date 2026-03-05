@@ -2,6 +2,13 @@ from odoo import models, fields, api
 
 
 class DiagnosisReportWizard(models.TransientModel):
+    """
+    Wizard for generating filtered reports of approved diagnoses.
+
+    Allows users to define a specific date range and filter results by
+    medical professionals or specific diseases. The results are presented
+    through dynamic views including lists, pivot tables, and graphs.
+    """
     _name = 'hr.hospital.diagnosis.report.wizard'
     _description = 'Diagnosis report wizard'
 
@@ -13,6 +20,16 @@ class DiagnosisReportWizard(models.TransientModel):
 
     @api.model
     def default_get(self, fields_list):
+        """
+        Pre-fill the doctor selection based on the active UI context.
+
+        If the wizard is launched from a doctor's record or list,
+        automatically adds those doctors to the wizard's selection.
+
+        :param list fields_list: Fields to get default values for.
+        :return: Dictionary of default values.
+        :rtype: dict
+        """
         res = super().default_get(fields_list)
         active_ids = self.env.context.get('active_ids')
         active_model = self.env.context.get('active_model')
@@ -23,6 +40,15 @@ class DiagnosisReportWizard(models.TransientModel):
         return res
 
     def action_open_report(self):
+        """
+        Execute the search and open the diagnosis view with applied filters.
+
+        Constructs a dynamic domain based on the user's input and returns
+        an action to display the matching diagnosis records.
+
+        :return: Dictionary defining the client-side window action.
+        :rtype: dict
+        """
         self.ensure_one()
         domain = [
             ('approved_date', '>=', self.date_from),

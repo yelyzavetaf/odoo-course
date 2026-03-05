@@ -6,6 +6,13 @@ from odoo.exceptions import UserError, ValidationError
 
 
 class HrHospitalVisit(models.Model):
+    """
+    Model for managing patient appointments and medical consultations.
+
+    Tracks the lifecycle of a visit from planning to completion or cancellation.
+    Stores clinical data such as visit type, actual timing, associated
+    diagnoses, and financial information using the company's default currency.
+    """
     _name = 'hr.hospital.visit'
     _description = 'Visit'
 
@@ -76,6 +83,15 @@ class HrHospitalVisit(models.Model):
 
     @api.constrains('planned_date', 'doctor_id')
     def _check_visit_date_validity(self):
+        """
+        Ensure the visit date is valid according to hospital policy and doctor availability.
+
+        Validates that:
+        - The visit is not scheduled on a weekend (Saturday or Sunday).
+        - The assigned doctor is not on vacation for the selected date.
+
+        :raises ValidationError: If the date falls on a weekend or conflicts with doctor's vacation.
+        """
         for record in self:
             if not record.planned_date or not record.doctor_id:
                 continue
@@ -102,6 +118,10 @@ class HrHospitalVisit(models.Model):
 
     @api.depends('patient_id', 'doctor_id')
     def _compute_display_name(self):
+        """
+        Generate a descriptive display name for the visit.
+        Format: "Patient Name (Doctor Name (Specialty))"
+        """
         for visit in self:
             visit.display_name = (f"{visit.patient_id.full_name} "
                                   f"({visit.doctor_id.full_name} "
@@ -109,11 +129,17 @@ class HrHospitalVisit(models.Model):
 
     @api.depends('diagnosis_ids')
     def _compute_diagnosis_count(self):
+        """
+        Calculate the total number of diagnoses associated with this visit.
+        """
         for visit in self:
             visit.diagnosis_count = len(visit.diagnosis_ids)
 
     @api.onchange('patient_id')
     def _onchange_patient_id(self):
+        """
+        Display a warning notification if the selected patient has documented allergies.
+        """
         if self.patient_id and self.patient_id.allergies:
             return {
                 'warning': {
@@ -125,6 +151,14 @@ class HrHospitalVisit(models.Model):
 
     @api.model_create_multi
     def create(self, vals_list):
+        """
+        Override create to prevent duplicate appointments on the same day.
+
+        Checks if a patient already has an active visit scheduled with the
+        same doctor on the same calendar date.
+
+        :raises UserError: If a duplicate visit is detected.
+        """
         for vals in vals_list:
             patient_id = vals.get('patient_id')
             doctor_id = vals.get('doctor_id')
@@ -153,6 +187,14 @@ class HrHospitalVisit(models.Model):
         return super().create(vals_list)
 
     def write(self, vals):
+        """
+        Restrict modifications to historical visit records.
+
+        Prevents changing essential fields (doctor, patient, dates) if the
+        visit's actual date is in the past, ensuring data integrity.
+
+        :raises UserError: If an attempt is made to update a past visit.
+        """
         essential_fields = [
             'doctor_id', 'patient_id', 'planned_date', 'actual_date'
         ]
@@ -167,6 +209,14 @@ class HrHospitalVisit(models.Model):
         return super().write(vals)
 
     def unlink(self):
+        """
+        Prevent deletion of visits that contain medical findings.
+
+        Ensures that any visit with linked diagnoses cannot be removed
+        from the system to preserve medical history.
+
+        :raises UserError: If the visit has one or more associated diagnoses.
+        """
         for visit in self:
             if visit.diagnosis_ids:
                 raise UserError(_(

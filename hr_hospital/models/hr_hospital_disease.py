@@ -4,6 +4,13 @@ from odoo.exceptions import ValidationError
 
 
 class HrHospitalDisease(models.Model):
+    """
+    Model for managing a hierarchical classifier of diseases.
+
+    This model supports parent-child relationships using the Odoo Nested Sets
+    (parent_store) feature for efficient tree traversal. It includes ICD-10
+    coding, danger levels, and multi-language support for names and descriptions.
+    """
     _name = 'hr.hospital.disease'
     _description = 'Disease'
     _parent_name = "parent_id"
@@ -52,5 +59,13 @@ class HrHospitalDisease(models.Model):
 
     @api.constrains('parent_id')
     def _check_hierarchy(self):
+        """
+        Validate that the disease hierarchy does not contain recursive loops.
+
+        Uses the built-in Odoo _has_cycle() method to ensure a record
+        cannot be its own ancestor.
+
+        :raises ValidationError: If a recursive loop is detected.
+        """
         if self._has_cycle():
             raise ValidationError(_('Recursive hierarchy created.'))

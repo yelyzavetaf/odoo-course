@@ -3,6 +3,13 @@ from odoo.exceptions import UserError
 
 
 class HrHospitalRescheduleVisitWizard(models.TransientModel):
+    """
+    Wizard for rescheduling patient appointments.
+
+    Facilitates the process of moving an existing visit to a new date or
+    assigning a different doctor. The original visit is archived,
+    and a new record is created to maintain full traceability of changes.
+    """
     _name = 'hr.hospital.reschedule.visit.wizard'
     _description = 'Reschedule Visit'
 
@@ -16,6 +23,16 @@ class HrHospitalRescheduleVisitWizard(models.TransientModel):
 
     @api.model
     def default_get(self, fields_list):
+        """
+        Pre-populate the wizard with data from the source visit record.
+
+        Automatically links the active visit and suggests the current doctor
+        as a default for the new appointment.
+
+        :param list fields_list: Fields to retrieve default values for.
+        :return: Initial values dictionary.
+        :rtype: dict
+        """
         res = super().default_get(fields_list)
         active_id = self.env.context.get('active_id')
         if active_id:
@@ -25,6 +42,16 @@ class HrHospitalRescheduleVisitWizard(models.TransientModel):
         return res
 
     def action_reschedule(self):
+        """
+        Archive the current visit and create a new one with updated details.
+
+        Sets the current visit to inactive and initializes a new visit record
+        copying essential data (patient, type) but applying the new timing.
+
+        :raises UserError: If the source visit cannot be identified.
+        :return: An action to open the newly created visit form.
+        :rtype: dict
+        """
         self.ensure_one()
         if not self.visit_id:
             raise UserError("Visit not found.")

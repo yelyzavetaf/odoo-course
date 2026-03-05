@@ -3,6 +3,14 @@ from odoo import models, fields
 
 
 class HrHospitalDoctorScheduleWizard(models.TransientModel):
+    """
+    Wizard for mass generation of doctor work schedules.
+
+    Allows administrators to populate a doctor's schedule for multiple weeks
+    at once. Supports different cycle types (standard, even, or odd weeks),
+    specific day selections, and automated split-shift generation if a
+    lunch break is specified.
+    """
     _name = 'hr.hospital.doctor.schedule.wizard'
     _description = 'Schedule fill in wizard'
 
@@ -44,6 +52,16 @@ class HrHospitalDoctorScheduleWizard(models.TransientModel):
     break_end = fields.Float()
 
     def action_generate_schedule(self):
+        """
+        Generate schedule records based on the wizard's configuration.
+
+        Iterates through the specified number of weeks, checks week parity
+        (if even/odd mode is active), and creates daily work entries.
+        If a break is defined, it splits the work day into two separate records.
+
+        :return: Action to close the wizard modal.
+        :rtype: dict
+        """
         self.ensure_one()
         days_selection = {
             0: (self.mo, 'monday'),
@@ -86,6 +104,16 @@ class HrHospitalDoctorScheduleWizard(models.TransientModel):
         return {'type': 'ir.actions.act_window_close'}
 
     def _prepare_schedule_val(self, date, day_name, start, end):
+        """
+        Format a single dictionary for the doctor.schedule creation.
+
+        :param date date: The target date for the schedule.
+        :param str day_name: Technical name of the day of the week.
+        :param float start: Starting hour.
+        :param float end: Ending hour.
+        :return: Dictionary of field values.
+        :rtype: dict
+        """
         return {
             'doctor_schedule_id': self.doctor_id.id,
             'date': date,

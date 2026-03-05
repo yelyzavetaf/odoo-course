@@ -7,6 +7,14 @@ from odoo.exceptions import UserError, ValidationError
 
 
 class HrHospitalDoctor(models.Model):
+    """
+    Model representing medical staff within the hospital system.
+
+    Extends the abstract person model to include professional medical data
+    such as specialties, licensing, and education. It manages a hierarchical
+    mentorship system between experienced doctors and interns, tracks work
+    schedules, patient history, and performance ratings.
+    """
     _name = 'hr.hospital.doctor'
     _description = 'Doctor'
     _inherit = 'hr.hospital.abstract.person'
@@ -89,6 +97,10 @@ class HrHospitalDoctor(models.Model):
 
     @api.depends('full_name')
     def _compute_display_name(self):
+        """
+        Format the doctor's display name to include their specialty.
+        Example: "Ivanov Ivan (Cardiologist)"
+        """
         for doctor in self:
             doctor.display_name = (
                 f"{doctor.full_name} ({doctor.speciality_id.name})"
@@ -96,6 +108,9 @@ class HrHospitalDoctor(models.Model):
 
     @api.depends('experience')
     def _compute_experience(self):
+        """
+        Calculate years of professional experience based on the license issue date.
+        """
         for doctor in self:
             today = date.today()
             diff = relativedelta(today, doctor.licence_issued_date)
@@ -103,6 +118,11 @@ class HrHospitalDoctor(models.Model):
 
     @api.constrains('mentor_id')
     def _check_self_mentor(self):
+        """
+        Ensure the mentorship logic is consistent:
+        - A doctor cannot mentor themselves.
+        - An intern cannot be assigned as a mentor.
+        """
         for doctor in self:
             if doctor.mentor_id == self.user_id:
                 raise ValidationError(_("Doctor can not be his/her own mentor."))
@@ -111,6 +131,9 @@ class HrHospitalDoctor(models.Model):
 
     @api.onchange('is_intern')
     def _onchange_is_intern(self):
+        """
+        Automatically suggest a default mentor when the doctor is marked as an intern.
+        """
         if self.is_intern:
             self.mentor_id = self.env['hr.hospital.doctor'].browse(2)
             return {
@@ -121,6 +144,9 @@ class HrHospitalDoctor(models.Model):
             }
 
     def action_archive(self):
+        """
+        Prevent archiving a doctor if they have any active visits linked to them.
+        """
         for doctor in self:
             if doctor.visits_ids:
                 for visit in doctor.visits_ids:
@@ -131,6 +157,9 @@ class HrHospitalDoctor(models.Model):
         return super().action_archive()
 
     def action_create_visit_from_kanban(self):
+        """
+        Open a compose form for a new visit directly from the doctor's Kanban card.
+        """
         self.ensure_one()
         return {
             'name': 'New Visit',

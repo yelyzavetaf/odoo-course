@@ -4,6 +4,13 @@ from odoo import api, models, fields
 
 
 class HrHospitalDiagnosis(models.Model):
+    """
+    Model for managing patient diagnoses in the hospital system.
+
+    Stores detailed information about a disease identified during a visit,
+    including severity level, prescribed treatment, and the approval status
+    by a specialized doctor.
+    """
     _name = 'hr.hospital.diagnosis'
     _description = 'Diagnosis'
 
@@ -54,6 +61,15 @@ class HrHospitalDiagnosis(models.Model):
 
     @api.model
     def _get_visit_domain(self):
+        """
+        Generate a dynamic domain for the visit_id field.
+
+        Filters visits to include only those that are marked as 'done'
+        and occurred within the last 30 days to ensure data relevance.
+
+        :return: A list representing the Odoo domain filter.
+        :rtype: list
+        """
         date_limit = fields.Date.today() - timedelta(days=30)
         return [
             ('visit_status', '=', 'done'),

@@ -7,6 +7,13 @@ from odoo.exceptions import ValidationError
 
 
 class HrHospitalAbstractPerson(models.AbstractModel):
+    """
+    Abstract model providing common fields and logic for individuals.
+
+    Includes basic identity data (name, sex, birth date), contact information,
+    and citizenship details. Implements automated full name formatting,
+    age calculation, and strict validation for phone numbers and emails.
+    """
     _name = 'hr.hospital.abstract.person'
     _description = 'Abstract Person'
     _inherit = 'image.mixin'
@@ -49,6 +56,12 @@ class HrHospitalAbstractPerson(models.AbstractModel):
 
     @api.constrains('phone_number')
     def _check_phone_number(self):
+        """
+        Validate that the phone number contains exactly 10 digits.
+
+        :raises ValidationError: If the phone contains non-digit characters
+                                 or is shorter than 10 digits.
+        """
         for person in self:
             if person.phone_number and not person.phone_number.isdigit():
                 raise ValidationError(
@@ -59,6 +72,13 @@ class HrHospitalAbstractPerson(models.AbstractModel):
 
     @api.constrains('email')
     def _check_email(self):
+        """
+        Ensure the email address follows a valid standard format.
+
+        Uses a regular expression to verify the structure: local@domain.tld.
+
+        :raises ValidationError: If the email format is invalid.
+        """
         for person in self:
             if person.email:
                 email_regex = r'^[\w\.-]+@[\w\.-]+\.\w+$'

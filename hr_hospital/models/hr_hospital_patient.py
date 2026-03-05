@@ -6,6 +6,15 @@ from odoo.exceptions import ValidationError
 
 
 class HrHospitalPatient(models.Model):
+    """
+    Model for managing patient records within the hospital ecosystem.
+
+    Extends the abstract person model to include specific medical data such
+    as blood type, allergies, and birthdate. It maintains relationships
+    with attending doctors, insurance companies, and contact persons.
+    The model also tracks clinical history through automated visit counting
+    and diagnosis logs.
+    """
     _name = 'hr.hospital.patient'
     _description = 'Patient'
     _inherit = 'hr.hospital.abstract.person'
@@ -78,6 +87,12 @@ class HrHospitalPatient(models.Model):
     )
 
     def _compute_last_visit_id(self):
+        """
+        Identify and store the most recent visit for each patient.
+
+        Searches the visit records ordered by planned date in descending order
+        to find the single latest occurrence.
+        """
         for patient in self:
             last_visit = self.env['hr.hospital.visit'].search([
                 ('patient_id', '=', patient.id),
@@ -86,12 +101,23 @@ class HrHospitalPatient(models.Model):
             patient.last_visit_id = last_visit
 
     def _compute_visit_count(self):
+        """
+        Calculate the total number of visits associated with the patient.
+
+        Used for displaying statistics in the stat-button on the patient form.
+        """
         for patient in self:
             patient.visit_count = self.env['hr.hospital.visit'].search_count([
                 ('patient_id', '=', patient.id)
             ])
 
     def action_view_patient_visits(self):
+        """
+        Return an action to display a filtered list of all visits for this patient.
+
+        Provides multiple view modes (list, form, calendar) and sets the
+        default patient in the context for new records.
+        """
         self.ensure_one()
         return {
             'name': 'Patient visits',
@@ -103,6 +129,11 @@ class HrHospitalPatient(models.Model):
         }
 
     def action_create_new_visit(self):
+        """
+        Launch a wizard-style modal form to create a new visit for the patient.
+
+        Automatically pre-fills the patient field and sets the planned date to now.
+        """
         self.ensure_one()
         return {
             'name': 'New visit',
@@ -118,6 +149,14 @@ class HrHospitalPatient(models.Model):
 
     @api.constrains('birth_date')
     def _check_birth_date(self):
+        """
+        Validate the patient's birthdate and calculate their age.
+
+        Ensures that the birthdate is in the past and the calculated age
+        is a positive integer.
+
+        :raises ValidationError: If the calculated age is zero or negative.
+        """
         for person in self:
             today = date.today()
             diff = relativedelta(today, person.birth_date)
@@ -129,11 +168,20 @@ class HrHospitalPatient(models.Model):
 
     @api.depends('full_name')
     def _compute_display_name(self):
+        """
+        Set the record's display name to the patient's full name.
+        """
         for patient in self:
             patient.display_name = patient.full_name
 
     @api.onchange('country_id')
     def _onchange_country_id(self):
+        """
+        Automatically suggest a language based on the selected country's code.
+
+        Searches for a matching language record and provides a warning
+        notification to the user about the suggested update.
+        """
         if self.country_id:
 
             country_code = self.country_id.code
@@ -152,6 +200,12 @@ class HrHospitalPatient(models.Model):
                 }
 
     def write(self, vals):
+        """
+        Override write to track changes in the attending doctor.
+
+        Whenever the doctor_id is updated, a new entry is created in the
+        patient's doctor history to maintain a chronological record of assignments.
+        """
         if 'doctor_id' in vals:
             for patient in self:
                 if patient.doctor_id.id != vals.get("doctor_id"):

@@ -4,6 +4,13 @@ from odoo import models, fields
 
 
 class HrHospitalDoctorSchedule(models.Model):
+    """
+    Model for managing medical staff work schedules and absences.
+
+    Tracks daily availability, including working hours, vacations, and
+    other leave types. It ensures data integrity through time-range
+    validation and supports filtering doctors by professional specialty.
+    """
     _name = 'hr.hospital.doctor.schedule'
     _description = 'Doctor Schedule'
 

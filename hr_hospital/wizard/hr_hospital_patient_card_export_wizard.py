@@ -6,6 +6,13 @@ from odoo import models, fields, api
 
 
 class HrHospitalPatientCardExportWizard(models.TransientModel):
+    """
+    Wizard for exporting patient medical history to external formats.
+
+    Allows users to generate a portable file (JSON or CSV) containing visit
+    history, diagnoses, and recommendations for a specific period. It
+    supports language selection and dynamic file generation for download.
+    """
     _name = 'hr.hospital.patient.card.export.wizard'
     _description = 'Export medical card'
 
@@ -33,6 +40,13 @@ class HrHospitalPatientCardExportWizard(models.TransientModel):
 
     @api.model
     def default_get(self, fields_list):
+        """
+        Set the default patient and language based on the active record.
+
+        :param list fields_list: Fields to retrieve defaults for.
+        :return: Initial values for the wizard form.
+        :rtype: dict
+        """
         res = super().default_get(fields_list)
         active_id = self._context.get('active_id')
         if active_id and self._context.get('active_model') == 'hr.hospital.patient':
@@ -48,6 +62,16 @@ class HrHospitalPatientCardExportWizard(models.TransientModel):
         return res
 
     def action_export(self):
+        """
+        Gather medical data and generate the export file in the chosen format.
+
+        Filters visits by patient and date range, then serializes the data
+        into JSON or CSV. The resulting file is stored in a binary field
+        and offered for download via a URL action.
+
+        :return: A URL action to trigger the file download.
+        :rtype: dict
+        """
         self.ensure_one()
 
         domain = [('patient_id', '=', self.patient_id.id)]

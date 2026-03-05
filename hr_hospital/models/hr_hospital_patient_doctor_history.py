@@ -4,6 +4,13 @@ from odoo import api, models, fields
 
 
 class HrHospitalPatientDoctorHistory(models.Model):
+    """
+    Model for tracking the historical assignments of doctors to patients.
+
+    This model maintains a chronological record of which doctor was assigned
+    to a patient and when. It automatically manages record lifecycle by
+    archiving previous assignments when a new doctor is designated.
+    """
     _name = 'hr.hospital.patient.doctor.history'
     _description = 'Patient Doctor History'
 
@@ -27,6 +34,17 @@ class HrHospitalPatientDoctorHistory(models.Model):
 
     @api.model_create_multi
     def create(self, vals_list):
+        """
+        Override create to ensure only one doctor assignment is active at a time.
+
+        Before creating new history records, it searches for existing active
+        assignments for the same patients and marks them as inactive,
+        setting the reassignment date to today.
+
+        :param list vals_list: List of dictionaries containing record values.
+        :return: Created records.
+        :rtype: hr.hospital.patient.doctor.history
+        """
         for vals in vals_list:
             patient_id = vals.get('patient_history_id')
             if patient_id:

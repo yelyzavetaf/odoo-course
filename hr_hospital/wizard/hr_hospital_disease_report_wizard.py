@@ -2,6 +2,13 @@ from odoo import models, fields, api
 
 
 class HrHospitalDiseaseReportWizard(models.TransientModel):
+    """
+    Wizard for generating analytical reports on diseases.
+
+    Provides flexible filtering by doctors, specific diseases, and patient
+    citizenship within a defined timeframe. Supports both detailed and
+    summary report types with multiple grouping options for data analysis.
+    """
     _name = 'hr.hospital.disease.report.wizard'
     _description = 'Disease Report'
 
@@ -34,6 +41,15 @@ class HrHospitalDiseaseReportWizard(models.TransientModel):
 
     @api.onchange('country_ids')
     def _onchange_country_ids(self):
+        """
+        Dynamically filter the available doctors based on selected countries.
+
+        Filters doctors to show only those who received their education
+        in the countries specified in the wizard.
+
+        :return: A dictionary containing the domain for the doctor_ids field.
+        :rtype: dict
+        """
         domain = []
         if self.country_ids:
             domain = [('education_country_id', 'in', self.country_ids.ids)]
@@ -41,6 +57,15 @@ class HrHospitalDiseaseReportWizard(models.TransientModel):
         return {'domain': {'doctor_ids': domain}}
 
     def action_get_report_data(self):
+        """
+        Construct a complex search domain and return the filtered diagnosis view.
+
+        Aggregates filters from the wizard's fields (dates, doctors, diseases,
+        and patient countries) to provide a precise subset of medical data.
+
+        :return: A window action to display the filtered diagnoses.
+        :rtype: dict
+        """
         domain = [
             ('approved_date', '>=', self.date_start),
             ('approved_date', '<=', self.date_end)
