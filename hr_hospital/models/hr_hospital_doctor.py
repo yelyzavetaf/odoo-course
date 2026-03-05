@@ -1,7 +1,7 @@
 from datetime import date
 from dateutil.relativedelta import relativedelta
 
-from odoo import api, models, fields
+from odoo import _, api, models, fields
 
 from odoo.exceptions import UserError, ValidationError
 
@@ -105,9 +105,9 @@ class HrHospitalDoctor(models.Model):
     def _check_self_mentor(self):
         for doctor in self:
             if doctor.mentor_id == self.user_id:
-                raise ValidationError("Doctor can not be his/her own mentor.")
+                raise ValidationError(_("Doctor can not be his/her own mentor."))
             if doctor.mentor_id.is_intern:
-                raise ValidationError("Intern can not be a mentor.")
+                raise ValidationError(_("Intern can not be a mentor."))
 
     @api.onchange('is_intern')
     def _onchange_is_intern(self):
@@ -115,8 +115,8 @@ class HrHospitalDoctor(models.Model):
             self.mentor_id = self.env['hr.hospital.doctor'].browse(2)
             return {
                 'warning': {
-                    'title': "Intern was chosen",
-                    'message': "Mentor was assigned automatically",
+                    'title': _("Intern was chosen"),
+                    'message': _("Mentor was assigned automatically",)
                 }
             }
 
@@ -126,7 +126,7 @@ class HrHospitalDoctor(models.Model):
                 for visit in doctor.visits_ids:
                     if visit.active:
                         raise UserError(
-                            "Can not archive doctor with active visits."
+                            _("Can not archive doctor with active visits.")
                         )
         return super().action_archive()
 

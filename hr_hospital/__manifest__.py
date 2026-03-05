@@ -9,7 +9,9 @@
     'depends': ['base', ],
 
     'data': [
+        "security/hr_hospital_groups.xml",
         "security/ir.model.access.csv",
+        "security/hr_hospital_security.xml",
         "data/hr_hospital_disease_data.xml",
         "wizard/hr_hospital_mass_reassign_doctor_wizard_view.xml",
         "wizard/hr_hospital_disease_report_wizard_view.xml",

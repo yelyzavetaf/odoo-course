@@ -1,6 +1,6 @@
 from datetime import datetime, time
 
-from odoo import api, models, fields
+from odoo import _, api, models, fields
 
 from odoo.exceptions import UserError, ValidationError
 
@@ -83,7 +83,7 @@ class HrHospitalVisit(models.Model):
             weekday = record.planned_date.weekday()
             if weekday >= 5:
                 raise ValidationError(
-                    "Scheduling a visit for a weekend is not allowed."
+                    _("Scheduling a visit for a weekend is not allowed.")
                 )
 
             visit_date = record.planned_date.date()
@@ -95,10 +95,10 @@ class HrHospitalVisit(models.Model):
             ], limit=1)
 
             if holiday:
-                raise ValidationError(
+                raise ValidationError(_(
                     f"Doctor {record.doctor_id.full_name} on "
                     f"{visit_date} is on vacation!"
-                )
+                ))
 
     @api.depends('patient_id', 'doctor_id')
     def _compute_display_name(self):
@@ -117,9 +117,9 @@ class HrHospitalVisit(models.Model):
         if self.patient_id and self.patient_id.allergies:
             return {
                 'warning': {
-                    'title': "Warning",
-                    'message': f"The chosen patient has allergies "
-                               f"{self.patient_id.allergies}."
+                    'title': _("Warning"),
+                    'message': _(f"The chosen patient has allergies "
+                                 f"{self.patient_id.allergies}.")
                 }
             }
 
@@ -146,10 +146,10 @@ class HrHospitalVisit(models.Model):
 
                 if duplicate:
                     doctor = self.env['hr.hospital.doctor'].browse(doctor_id)
-                    raise UserError(
+                    raise UserError(_(
                         f"Patient has already planned a visit to "
                         f"{doctor.display_name} for {planned_dt.date()}."
-                    )
+                    ))
         return super().create(vals_list)
 
     def write(self, vals):
@@ -160,17 +160,17 @@ class HrHospitalVisit(models.Model):
             if visit.actual_date:
                 if visit.actual_date.date() < fields.Date.context_today(self):
                     if any(field in vals for field in essential_fields):
-                        raise UserError(
+                        raise UserError(_(
                             f"Updating past visit (ID: {visit.id}) "
                             f"is not allowed."
-                        )
+                        ))
         return super().write(vals)
 
     def unlink(self):
         for visit in self:
             if visit.diagnosis_ids:
-                raise UserError(
+                raise UserError(_(
                     f"Removing visit (ID: {visit.id}) is not allowed "
                     "because of diagnosis added."
-                )
+                ))
         return super().unlink()

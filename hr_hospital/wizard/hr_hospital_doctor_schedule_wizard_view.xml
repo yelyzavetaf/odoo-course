@@ -21,13 +21,13 @@
                 </group>
                 <separator string="Select working days"/>
                 <div class="o_row">
-                    <field name="mo"/><label for="mo" string="Пн"/>
-                    <field name="tu" class="ms-3"/><label for="tu" string="Вт"/>
-                    <field name="we" class="ms-3"/><label for="we" string="Ср"/>
-                    <field name="th" class="ms-3"/><label for="th" string="Чт"/>
-                    <field name="fr" class="ms-3"/><label for="fr" string="Пт"/>
-                    <field name="sa" class="ms-3"/><label for="sa" string="Сб"/>
-                    <field name="su" class="ms-3"/><label for="su" string="Нд"/>
+                    <field name="mo" class="ms-3"/><label for="mo" string="Mon"/>
+                    <field name="tu" class="ms-3"/><label for="tu" string="Tue"/>
+                    <field name="we" class="ms-3"/><label for="we" string="Wed"/>
+                    <field name="th" class="ms-3"/><label for="th" string="Thu"/>
+                    <field name="fr" class="ms-3"/><label for="fr" string="Fri"/>
+                    <field name="sa" class="ms-3"/><label for="sa" string="Sat"/>
+                    <field name="su" class="ms-3"/><label for="su" string="Sun"/>
                 </div>
                 <footer>
                     <button name="action_generate_schedule" string="Generate" type="object" class="btn-primary"/>

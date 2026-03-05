@@ -1,4 +1,4 @@
-from odoo import api, models, fields
+from odoo import _, api, models, fields
 
 from odoo.exceptions import ValidationError
 
@@ -9,10 +9,10 @@ class HrHospitalDisease(models.Model):
     _parent_name = "parent_id"
     _parent_store = True
 
-    name = fields.Char(required=True)
+    name = fields.Char(required=True, translate="True")
 
     active = fields.Boolean(default=True)
-    description = fields.Text()
+    description = fields.Text(translate="True")
 
     is_contagious = fields.Boolean(default=False, string='Contagious')
 
@@ -28,7 +28,7 @@ class HrHospitalDisease(models.Model):
         required=True,
     )
 
-    symptoms = fields.Text()
+    symptoms = fields.Text(translate="True")
 
     region_ids = fields.Many2many(
         comodel_name='res.country',
@@ -53,4 +53,4 @@ class HrHospitalDisease(models.Model):
     @api.constrains('parent_id')
     def _check_hierarchy(self):
         if self._has_cycle():
-            raise ValidationError('Recursive hierarchy created.')
+            raise ValidationError(_('Recursive hierarchy created.'))

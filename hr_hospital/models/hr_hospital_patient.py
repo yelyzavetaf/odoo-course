@@ -1,7 +1,7 @@
 from datetime import date
 from dateutil.relativedelta import relativedelta
 
-from odoo import api, models, fields
+from odoo import _, api, models, fields
 from odoo.exceptions import ValidationError
 
 
@@ -9,6 +9,12 @@ class HrHospitalPatient(models.Model):
     _name = 'hr.hospital.patient'
     _description = 'Patient'
     _inherit = 'hr.hospital.abstract.person'
+
+    user_id = fields.Many2one(
+        comodel_name='res.users',
+        string='Patient User',
+        ondelete='restrict',
+    )
 
     birth_date = fields.Date(required=True)
 
@@ -118,7 +124,7 @@ class HrHospitalPatient(models.Model):
             person.age = diff.years
             if person.age <= 0:
                 raise ValidationError(
-                    f"Patient age can not be {person.age} years."
+                    _(f"Patient age can not be {person.age} years.")
                 )
 
     @api.depends('full_name')
@@ -139,9 +145,9 @@ class HrHospitalPatient(models.Model):
                 self.language_id = lang
                 return {
                     'warning': {
-                        'title': "Patient country was changed",
-                        'message': f"Suggested language was updated "
-                                   f"to {lang.display_name}"
+                        'title': _("Patient country was changed"),
+                        'message': _(f"Suggested language was updated "
+                                     f"to {lang.display_name}")
                     }
                 }
 

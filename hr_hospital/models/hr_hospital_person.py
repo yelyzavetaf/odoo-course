@@ -2,7 +2,7 @@ import re
 from datetime import date
 from dateutil.relativedelta import relativedelta
 
-from odoo import api, models, fields
+from odoo import _, api, models, fields
 from odoo.exceptions import ValidationError
 
 
@@ -52,10 +52,10 @@ class HrHospitalAbstractPerson(models.AbstractModel):
         for person in self:
             if person.phone_number and not person.phone_number.isdigit():
                 raise ValidationError(
-                    "Phone number should contain digits only."
+                    _("Phone number should contain digits only.")
                 )
             if person.phone_number and len(person.phone_number) < 10:
-                raise ValidationError("Phone number is too short.")
+                raise ValidationError(_("Phone number is too short."))
 
     @api.constrains('email')
     def _check_email(self):
@@ -63,8 +63,8 @@ class HrHospitalAbstractPerson(models.AbstractModel):
             if person.email:
                 email_regex = r'^[\w\.-]+@[\w\.-]+\.\w+$'
                 if not re.match(email_regex, person.email):
-                    raise ValidationError(f"Wrong email format: "
-                                          f"{person.email}")
+                    raise ValidationError(_(f"Wrong email format: "
+                                          f"{person.email}"))
 
     @api.depends('birth_date')
     def _compute_age(self):

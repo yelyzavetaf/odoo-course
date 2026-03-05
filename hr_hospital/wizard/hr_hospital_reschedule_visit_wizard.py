@@ -17,7 +17,7 @@ class HrHospitalRescheduleVisitWizard(models.TransientModel):
     @api.model
     def default_get(self, fields_list):
         res = super().default_get(fields_list)
-        active_id = self._context.get('active_id')
+        active_id = self.env.context.get('active_id')
         if active_id:
             res['visit_id'] = active_id
             visit = self.env['hr.hospital.visit'].browse(active_id)
